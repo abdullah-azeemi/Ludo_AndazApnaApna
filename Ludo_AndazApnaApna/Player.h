@@ -13,7 +13,7 @@ private:
 	Pos end_Pos;
 	Pos diceWin_Pos;
 	char* Sym;
-	MEAWWWWWWWOOOOOOOOOOOOOO 
+	
 protected :
 	int piecesAthome;
 	int piecesAtJail;
