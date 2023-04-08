@@ -9,9 +9,9 @@ class Player
 private:
 	string Name;
 	Color C;
-	Pos start_Pos;
-	Pos end_Pos;
-	Pos diceWin_Pos;
+	int start_Pos;
+	int end_Pos;
+	int diceWin_Pos;
 	char* Sym;
 	
 protected :
@@ -20,12 +20,12 @@ protected :
 	int piecesonBoard;
 
 public:
-	Player(string _Name, Color _C, Pos _start_Pos, Pos _end_Pos, Pos _diceWin_Pos, char* _sym);
+	Player(string _Name, Color _C, int _start_Pos, int _end_Pos, int _diceWin_Pos, char* _sym);
 	string getName();
 	Color getColor();
-	Pos get_StartPos();
-	Pos get_EndPos();
-	Pos get_diceWin_Pos();
+	int get_StartPos();
+	int get_EndPos();
+	int get_diceWin_Pos();
 	char* getSymbols();
 
 

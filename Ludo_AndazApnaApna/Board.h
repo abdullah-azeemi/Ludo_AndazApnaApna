@@ -9,15 +9,15 @@ class Board
 {
 private:
 	char** B;
-	Pos *start;
-	Pos *stop;
-	Pos *atHome;
+	int *start;
+	int *stop;
+	int *atHome;
 	int nop;
 
 
 public:
-	Player* Ps[6];
+	
 	Board();
-	Board(char** _B, Player _P[6], Pos* _st, Pos* _stop, Pos* _home, int _nop);
+	Board(char** _B, int* _st, int* _stop, int* _home, int _nop);
 };
 
