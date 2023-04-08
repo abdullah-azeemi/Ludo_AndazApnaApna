@@ -1,6 +1,6 @@
 #include "Player.h"
 
-Player::Player(string _Name, Color _C, int _start_Pos, int _end_Pos, int _diceWin_Pos, char* _sym)
+Player::Player(string _Name, Color _C, int _start_Pos, int _end_Pos, int _diceWin_Pos, char* _sym, vector<int> _initPos)
 {
 	this->Name = _Name;
 	this->C = _C;
@@ -8,6 +8,7 @@ Player::Player(string _Name, Color _C, int _start_Pos, int _end_Pos, int _diceWi
 	this->end_Pos = _end_Pos;
 	this->diceWin_Pos = _diceWin_Pos;
 	this->Sym = _sym;
+	this->initPos = _initPos;
 }
 string Player:: getName()
 {

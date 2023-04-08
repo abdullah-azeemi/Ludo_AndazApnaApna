@@ -1,7 +1,4 @@
 #pragma once
-#include"Board.h"
-#include"Player.h"
-#include"Dice.h"
 
 class Player;
 class Dice;
@@ -11,12 +8,14 @@ class Ludo
 {
 private:
 	Player* Ps[6];
-	Board* B;
+	//Board B;
 	int turn;
-	int* PlayerPositions;
-
+	Dice *D;
 public:
 	Ludo();
+	void displayTurnMsg(Player* P1);
+	void Play();
+	void turnChange();
 
 };
 
