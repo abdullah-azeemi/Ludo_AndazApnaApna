@@ -1,2 +1,3 @@
 #pragma once
-#include<windows.h>
+#include<SFML/Graphics.hpp>
+

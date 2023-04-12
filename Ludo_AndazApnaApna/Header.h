@@ -1,6 +1,5 @@
 #pragma once
-#include<windows.h>
-
+#include<SFML/Graphics.hpp>
 enum Color { BLUE = 1, GREEN = 2, RED = 3, YELLOW = 14, DARKGREY = 8, MAGENTA = 5 };
 
 #define BLUE 1
