@@ -1,12 +1,5 @@
 #include "Player.h"
 
-static sf::Texture goti1;
-static sf::Texture goti2;
-static sf::Texture goti3;
-static sf::Texture goti4;
-static sf::Texture goti5;
-static sf::Texture goti6;
-
 Player::Player(string _Name, Color _C, int _start_Pos, int _end_Pos, int _diceWin_Pos, char* _sym, vector<int> _initPos, int piecesH, int piecesJ, int piecesB)
 {
 	this->Name = _Name;
@@ -56,32 +49,57 @@ int Player::getpiecesonBoard()
 {
 	return this->piecesonBoard;
 }
-void Player::getOutofHome(int turn)
+void Player::getOutofHome(int turn, int nop)
 {
-	if (piecesAtJail > 0)
+	if (nop > 4)
 	{
-		int x = piecesonBoard;
+		if (piecesAtJail > 0)
+		{
+			int x = piecesonBoard;
 
-		this->piecesonBoard+=1;
-		this->piecesAtJail-=1;
-		if (turn == 0)
-			initPos[x] = 1;
-	
-		else if (turn == 1)
-			initPos[x] = 14;
+			this->piecesonBoard += 1;
+			this->piecesAtJail -= 1;
+			if (turn == 0)
+				initPos[x] = 1;
 
-		else if (turn == 2)
-			initPos[x] = 27;
+			else if (turn == 1)
+				initPos[x] = 14;
 
-		else if (turn == 4)
-			initPos[x] = 46;
-		
-		else if (turn == 5)
-			initPos[x] = 59;
-		
-		else 
-			initPos[x] = 72;
-		
+			else if (turn == 2)
+				initPos[x] = 27;
+
+			else if (turn == 4)
+				initPos[x] = 46;
+
+			else if (turn == 5)
+				initPos[x] = 59;
+
+			else
+				initPos[x] = 72;
+
+		}
+	}
+	else
+	{
+		if (piecesAtJail > 0)
+		{
+			int x = piecesonBoard;
+
+			this->piecesonBoard += 1;
+			this->piecesAtJail -= 1;
+			if (turn == 0)
+				initPos[x] = 1;
+
+			else if (turn == 1)
+				initPos[x] = 14+1;
+
+			else if (turn == 2)
+				initPos[x] = 27+1;
+
+			else if (turn == 3)
+				initPos[x] = 40;
+
+		}
 	}
 }   
 int Player::getPos(int index)
@@ -90,5 +108,16 @@ int Player::getPos(int index)
 }
 void Player::move(int number, int Pieceindex)
 {
-	//initPos[Pieceindex];
+	//initPos[Pieceindex]
+	if (this->getpiecesonBoard() > 0)
+	{
+		cout << "\n Do you want to move : (Y) / (N) : ";
+		char choice;
+		cin >> choice;
+		
+	}
+}
+vector<int>Player::getPositions()
+{
+	return this->initPos;
 }

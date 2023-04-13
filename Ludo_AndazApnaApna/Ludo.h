@@ -18,7 +18,6 @@ public:
 	void displayTurnMsg(Player* P1);
 	void Play();
 	void turnChange();
-	void loadAssests();
 
 };
 

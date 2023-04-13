@@ -24,12 +24,6 @@ protected :
 	
 
 public:
-	static sf::Texture goti1;
-	static sf::Texture goti2;
-	static sf::Texture goti3;
-	static sf::Texture goti4;
-	static sf::Texture goti5;
-	static sf::Texture goti6;
 
 	Player(string _Name, Color _C, int _start_Pos, int _end_Pos, int _diceWin_Pos, char* _sym, vector<int> _initPos, int piecesH, int piecesJ, int piecesB);
 	string getName();
@@ -42,11 +36,9 @@ public:
 	int getpiecesAtJail();
 	int getpiecesonBoard();
 	int getPos(int index);
-
-	void getOutofHome(int turn);
+	vector<int>getPositions();
+	void getOutofHome(int turn, int nop);
 	void move(int number, int indexPiece);
-
-
 
 };
 
