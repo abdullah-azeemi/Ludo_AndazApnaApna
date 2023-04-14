@@ -1,5 +1,7 @@
 #pragma once
 #include<SFML/Graphics.hpp>
+#include<SFML/Window.hpp>
+#include<SFML/OpenGL.hpp>
 #include"Player.h"
 
 static void MouseClick(sf::RenderWindow& window, int& ri, int& ci)
@@ -40,7 +42,7 @@ static void getRowColbyLeftClick(int& rpos, int& cpos, sf::RenderWindow& window)
 }
 static void print6(sf::RenderWindow& window)
 {
-	int column = 300, row = 5;
+	int column = 0, row = 0;
 	sf::Texture temp;
 	if (!temp.loadFromFile("6board.png"))  //  img ==> file name for image
 	{
@@ -182,10 +184,12 @@ static int returnIndexforBoardfor4Board(int ci, int ri)
 	else if ((ci >= 690 && ci <= 730) && (ri >= 439 && ri <= 474))
 		return 45;
 
+	else 
+		return 100;
+
 }
 
-
-static void printYellow(sf::RenderWindow& window, int ri, int ci)
+static void printYellow(sf::RenderWindow& window, int ri, int ci, vector<sf::Sprite> & yellow)
 {
 	sf::Texture temp;
 	if (!temp.loadFromFile("Pyellow.png"))  //  img ==> file name for image
@@ -201,8 +205,9 @@ static void printYellow(sf::RenderWindow& window, int ri, int ci)
 	s.setPosition(ci, ri); // position of image
 	window.draw(s);	// draw() will only draw image on backend, image will not display on screen
 	  // display() will show image on screen
+	yellow.push_back(s);
 }
-static void printRed(sf::RenderWindow& window, int ri, int ci)
+static void printRed(sf::RenderWindow& window, int ri, int ci, vector<sf::Sprite> & red)
 {
 	sf::Texture temp;
 	if (!temp.loadFromFile("Pred.png"))  //  img ==> file name for image
@@ -217,9 +222,11 @@ static void printRed(sf::RenderWindow& window, int ri, int ci)
 
 	s.setPosition(ci, ri); // position of image
 	window.draw(s);	// draw() will only draw image on backend, image will not display on screen
+
+	red.push_back(s);
 	// display() will show image on screen
 }
-static void printGreen(sf::RenderWindow& window, int ri, int ci)
+static void printGreen(sf::RenderWindow& window, int ri, int ci, vector<sf::Sprite> & green)
 {
 	sf::Texture temp;
 	if (!temp.loadFromFile("Pgreen.png"))  //  img ==> file name for image
@@ -235,8 +242,9 @@ static void printGreen(sf::RenderWindow& window, int ri, int ci)
 	s.setPosition(ci, ri); // position of image
 	window.draw(s);	// draw() will only draw image on backend, image will not display on screen
 	// display() will show image on screen
+	green.push_back(s);
 }
-static void printBlue(sf::RenderWindow& window, int ri, int ci)
+static void printBlue(sf::RenderWindow& window, int ri, int ci, vector<sf::Sprite> &blue)
 {
 	sf::Texture temp;
 	if (!temp.loadFromFile("Pblue.png"))  //  img ==> file name for image
@@ -252,14 +260,13 @@ static void printBlue(sf::RenderWindow& window, int ri, int ci)
 	s.setPosition(ci, ri); // position of image
 	window.draw(s);	// draw() will only draw image on backend, image will not display on screen
 	// display() will show image on screen
+	blue.push_back(s);
 }
 static void returnLocforBoard(int number, int& ri, int& ci)
 {
 	/// These are the inityal hardcorded location for pieces in their homes 
 				// It will be different for each piece
-	//vector<int> Redri = { 290,513,287,589 };
-	//vector<int> Redci = { 439,519,516,439 };
-
+	
 	vector<int> Redri = { 513,513,589,589 };
 	vector<int> Redci = { 439,519,519,439 };
 
@@ -312,7 +319,7 @@ static void returnLocforBoard(int number, int& ri, int& ci)
 	}
 }
 
-static void printAllPieces(sf::RenderWindow& window, Player** Ps)
+static void printAllPieces(sf::RenderWindow& window, Player** Ps, vector<sf::Sprite> & red, vector<sf::Sprite> & yellow, vector<sf::Sprite> & blue, vector<sf::Sprite> &green)
 {
 	vector<int> redPos = Ps[0][0].getPositions();
 	vector<int> greenPos = Ps[1][0].getPositions();
@@ -323,25 +330,25 @@ static void printAllPieces(sf::RenderWindow& window, Player** Ps)
 	{
 		int ri = 0, ci = 0;
 		returnLocforBoard(redPos[i], ri, ci);
-		printRed(window, ri,ci);
+		printRed(window, ri,ci,red);
 	}
 	for (int i = 0; i < 4; i++)
 	{
 		int ri = 0, ci = 0;
 		returnLocforBoard(greenPos[i], ri, ci);
-		printGreen(window, ri, ci);
+		printGreen(window, ri, ci,green);
 	}
 	for (int i = 0; i < 4; i++)
 	{
 		int ri = 0, ci = 0;
 		returnLocforBoard(yellowPos[i], ri, ci);
-		printYellow(window, ri, ci);
+		printYellow(window, ri, ci,yellow);
 	}
 	for (int i = 0; i < 4; i++)
 	{
 		int ri = 0, ci = 0;
 		returnLocforBoard(bluePos[i], ri, ci);
-		printBlue(window, ri, ci);
+		printBlue(window, ri, ci,blue);
 	}
 	window.display();
 }

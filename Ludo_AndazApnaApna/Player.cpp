@@ -1,4 +1,5 @@
 #include "Player.h"
+#include"utility.h"
 
 Player::Player(string _Name, Color _C, int _start_Pos, int _end_Pos, int _diceWin_Pos, char* _sym, vector<int> _initPos, int piecesH, int piecesJ, int piecesB)
 {
@@ -12,6 +13,7 @@ Player::Player(string _Name, Color _C, int _start_Pos, int _end_Pos, int _diceWi
 	this->piecesAthome = piecesH;
 	this->piecesAtJail = piecesJ;
 	this->piecesonBoard = piecesB;
+	this->isValidSource = false;
 }
 string Player:: getName()
 {
@@ -106,8 +108,9 @@ int Player::getPos(int index)
 {
 	return this->initPos[index];
 }
-void Player::move(int number, int Pieceindex)
+void Player::move(int number, int diceRolled_number, int turn)
 {
+	isValidSource = false;
 	//initPos[Pieceindex]
 	if (this->getpiecesonBoard() > 0)
 	{
@@ -116,8 +119,50 @@ void Player::move(int number, int Pieceindex)
 		cin >> choice;
 		
 	}
+	int i=0;
+	for (i = 0; i < 4 && isValidSource == false; i++)
+	{
+		if (this->initPos[i] == number)
+		{
+			isValidSource = true;
+			break;
+		}
+	}
+	if(isValidSource)
+	{
+		if (initPos[i] >= 0)
+		{
+			this->initPos[i] += diceRolled_number;
+			cout << "\n Pos is : " << initPos[i];
+		}
+		else
+		{
+			cout << "\n Invalid Source or the piece is in the jail";
+		}
+	}
+
 }
+
 vector<int>Player::getPositions()
 {
 	return this->initPos;
+}
+void Player::move2(int diceRolled_number, int index, sf::Sprite & s)
+{
+	if (initPos[index] >= 0)
+	{
+		initPos[index] += diceRolled_number;
+	}
+	else
+	{
+		if (diceRolled_number == 6)
+		{
+			initPos[index] = Player::get_StartPos();
+		}
+	}
+	int ri = 0, ci = 0;
+	returnLocforBoard(initPos[index], ri, ci);
+	s.setPosition(ci,ri);
+
+	
 }

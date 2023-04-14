@@ -9,7 +9,6 @@ private:
 	vector<int> diceRoll;
 
 public:
-	int rollDice();
-	void diceRollSave(int & roller);
+	vector<int> rollDice();
 };
 

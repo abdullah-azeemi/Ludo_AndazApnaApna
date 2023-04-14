@@ -1,5 +1,10 @@
 #pragma once
 #include<SFML/Graphics.hpp>
+#include<list>
+#include<algorithm>
+#include<string>
+#include<string.h>
+#include<vector>
 enum Color { BLUE = 1, GREEN = 2, RED = 3, YELLOW = 14, DARKGREY = 8, MAGENTA = 5 };
 
 #define BLUE 1

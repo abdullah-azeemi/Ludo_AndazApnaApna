@@ -5,6 +5,13 @@
 #include"Board.h"
 #include"utility.h"
 
+bool isSpriteHover(sf::FloatRect sprite, sf::Vector2f mp)
+{
+	if (sprite.contains(mp)) {
+		return true;
+	}
+	return false;
+}
 
 Ludo::Ludo()
 { 
@@ -59,7 +66,9 @@ Ludo::Ludo()
 	
 	this->turn = 0;
 	this->indexForMaxRolls = 0;
-	
+	this->hasDice_rolled = false;
+	this->moved = false;
+
 }
 void Ludo::displayTurnMsg(Player* P1)
 {
@@ -71,6 +80,12 @@ void Ludo::turnChange()
 }
 void Ludo::Play()
 {
+
+	vector <sf::Sprite> red;
+	vector <sf::Sprite> blue;
+	vector <sf::Sprite> green;
+	vector <sf::Sprite> yellow;
+
 	int x = 0, y = 0, z;
 	while (false)
 	{
@@ -82,14 +97,14 @@ void Ludo::Play()
 			cout << "\n Press Enter to roll Dice : ";
 			cin >> y;
 
-			x = D->rollDice();
+			//x = D->rollDice();
 			cout << "\n The number is : " << x;
 			indexForMaxRolls++;
 
 			if (x == 6)
 			{
 				Ps[turn]->getOutofHome(turn, this->Nop);
-				Ps[turn]->move(x, 0);
+				Ps[turn]->move(x, 0, turn);
 				cout << "\n Count in Jail : " << Ps[turn]->getpiecesAtJail();
 				cout << "\n Count on Board : " << Ps[turn]->getpiecesonBoard();
 				cout << "\n Pieces location : " << Ps[turn]->getPos(0);
@@ -108,7 +123,7 @@ void Ludo::Play()
 		int ri, ci;
 		while (window.isOpen())
 		{
-			print4(window);
+			print6(window);
 			sf::Event evnt;
 			while (window.pollEvent(evnt))
 			{
@@ -132,7 +147,7 @@ void Ludo::Play()
 					if (evnt.mouseButton.button == sf::Mouse::Left) {
 						ri = evnt.mouseButton.y;
 						ci = evnt.mouseButton.x;
-						cout << "\n row is : " << ri << " col is : " << ci;
+						//cout << "\n row is : " << ri << " col is : " << ci;
 						int x = returnIndexforBoardfor4Board(ci, ri);
 						//cout << "\n Index is : " << x;
 					}
@@ -145,16 +160,17 @@ void Ludo::Play()
 			window.clear();
 		}
 	}
-	if (true)
+	if (false)
 	{
 
 		sf::RenderWindow window(sf::VideoMode(1440, 720), "Ludo Game", sf::Style::Close | sf::Style::Resize);
-
+		
+		turn = 0;
 		int ri, ci;
 		while (window.isOpen())
 		{
 			print4(window);
-			printAllPieces(window, this->Ps);
+			printAllPieces(window, this->Ps, red, yellow, blue, green);
 
 			indexForMaxRolls = 0;
 
@@ -162,6 +178,7 @@ void Ludo::Play()
 			sf::Event evnt;
 			while (window.pollEvent(evnt))
 			{
+				cout << "\n Turn is : " << turn;
 
 				switch (evnt.type)
 				{
@@ -177,28 +194,44 @@ void Ludo::Play()
 				case sf::Event::TextEntered:
 					cout << " " << char(evnt.text.unicode);
 					break;
-				case sf::Event::MouseButtonReleased:
-					//if (evnt.mouseButton.button == sf::Mouse::Left) {
-					//	ri = evnt.mouseButton.y;
-					//	ci = evnt.mouseButton.x;
-					//	//cout << "\n row is : " << ri << " col is : " << ci;
-					//	int x = returnIndexforBoardfor4Board(ci, ri);
-					//	//cout << "\n Index is : " << x;
-					//}
-					displayTurnMsg(Ps[turn]);
-					x = D->rollDice();
-					cout << "\n The number is : " << x;
-					indexForMaxRolls++;
+				//case sf::Event::MouseButtonReleased:
+				//	//if (evnt.mouseButton.button == sf::Mouse::Left) {
+				//	//	ri = evnt.mouseButton.y;
+				//	//	ci = evnt.mouseButton.x;
+				//	//	//cout << "\n row is : " << ri << " col is : " << ci;
+				//	//	int x = returnIndexforBoardfor4Board(ci, ri);
+				//	//	//cout << "\n Index is : " << x;
+				//	//}
+				//	do
+				//	{
+				//		displayTurnMsg(Ps[turn]);
+				//		x = D->rollDice();
+				//		cout << "\n The number is : " << x;
+				//		indexForMaxRolls++;
 
-					if (x == 6)
-					{
-						Ps[turn]->getOutofHome(turn, this->Nop);
-						Ps[turn]->move(x, 0);
-						cout << "\n Count in Jail : " << Ps[turn]->getpiecesAtJail();
-						cout << "\n Count on Board : " << Ps[turn]->getpiecesonBoard();
-						cout << "\n Pieces location : " << Ps[turn]->getPos(0);
-						window.clear();
-						printAllPieces(window, this->Ps);
+				//		if (x == 6)
+				//		{
+				//			Ps[turn]->getOutofHome(turn, this->Nop);
+				//			Ps[turn]->move(x, 0);
+				//			cout << "\n Count in Jail : " << Ps[turn]->getpiecesAtJail();
+				//			cout << "\n Count on Board : " << Ps[turn]->getpiecesonBoard();
+				//			cout << "\n Pieces location : " << Ps[turn]->getPos(0);
+				//			window.clear();
+				//			printAllPieces(window, this->Ps);
+				//		}
+				//	} while (indexForMaxRolls < 3 || x == 6);
+				//	break;
+
+				case sf::Event::MouseButtonPressed:
+					if (evnt.mouseButton.button == sf::Mouse::Left) {
+						ri = evnt.mouseButton.y;
+						ci = evnt.mouseButton.x;
+						int index = returnIndexforBoardfor4Board(ci, ri);
+						cout << "\n Index is : " << index;
+						cout << "\n turn is : " << turn;
+						//index = 1;
+						this->Ps[turn]->move(index, 5, turn);
+						printAllPieces(window, this->Ps, red, yellow, blue, green);
 					}
 					break;
 				}
@@ -207,9 +240,332 @@ void Ludo::Play()
 				{
 					
 				}
-				turnChange();
 				window.clear();
+			}
+			turnChange();
+		}
+	}
+
+	if (true)
+	{
+		if (true)
+		{
+			
+			sf::RenderWindow window(sf::VideoMode(1440, 720), "Ludo Game", sf::Style::Close | sf::Style::Resize);
+			
+			turn = 0;
+			int ri, ci;
+
+			sf::Sprite sprite;
+			sf::Texture texture;
+			if (!texture.loadFromFile("Dice1.png"))
+			{
+				cout << "button not loaded";
+			}
+			sprite.setTexture(texture);
+			sprite.setScale(0.35, 0.35);
+			
+			sf::Vector2f mp;
+			mp.x = sf::Mouse::getPosition(window).x;
+			mp.y = sf::Mouse::getPosition(window).y;
+
+			vector<sf::Sprite> gr;
+			gr.push_back(sprite);
+
+			
+			while (window.isOpen())
+			{
+				print4(window);
+				printAllPieces(window, this->Ps, red, yellow, blue, green);
+				indexForMaxRolls = 0;
+				sf::Event evnt;
+				while (window.pollEvent(evnt))
+				{
+					if (moved)
+					{
+						turnChange();
+						cout << "turn is " << turn;
+						moved = false;
+					}
+					switch (evnt.type)
+					{
+					case sf::Event::Closed:
+						window.close();
+						break;
+					case sf::Event::Resized:
+						std::cout << "new window width  " << evnt.size.width << "  new window height  " << evnt.size.height << std::endl;
+						break;
+					case sf::Event::TextEntered:
+						cout << " " << char(evnt.text.unicode);
+						break;
+
+					//case sf::Event::MouseButtonPressed:
+					//	if (evnt.mouseButton.button == sf::Mouse::Left) {
+					//		ri = evnt.mouseButton.y;
+					//		ci = evnt.mouseButton.x;
+					//		int index = returnIndexforBoardfor4Board(ci, ri);
+					//		if (index != 100)
+					//		{
+					//			cout << "\n Index is : " << index;
+					//			cout << "\n turn is : " << turn;
+					//			//index = 1;
+					//			this->Ps[turn]->move(index, 5, turn);
+					//			printAllPieces(window, this->Ps, red, yellow, blue, green);
+					//		}
+					//	}
+						break;
+					}
+					if (isSpriteHover(sprite.getGlobalBounds(), sf::Vector2f(evnt.mouseButton.x, evnt.mouseButton.y)) == true)
+					{
+						if (evnt.type == sf::Event::MouseButtonReleased && evnt.mouseButton.button == sf::Mouse::Left)
+						{
+							cout << "\n Turn : " << turn << " Dice rolled : ";
+							vector<int> x = D->rollDice();
+							ostream_iterator <int>output(cout, ", ");
+							copy(x.begin(), x.end(), output);
+							hasDice_rolled = true;
+						}
+					}
+					/*while (window.pollEvent(evnt))
+					{
+						if (evnt.type == sf::Event::Closed)
+							window.close();
+
+						if (isSpriteHover(sprite.getGlobalBounds(), sf::Vector2f(evnt.mouseButton.x, evnt.mouseButton.y)) == true)
+						{
+							if (evnt.type == sf::Event::MouseButtonReleased && evnt.mouseButton.button == sf::Mouse::Left)
+							{
+								cout << "\n The button Worked";
+							}
+						}
+
+					}*/
+
+					if (isSpriteHover(red[0].getGlobalBounds(), sf::Vector2f(evnt.mouseButton.x, evnt.mouseButton.y)) == true)
+					{
+						if (evnt.type == sf::Event::MouseButtonPressed && evnt.mouseButton.button == sf::Mouse::Left)
+						{
+							if (turn == 0)
+							{
+								cout << "\n Red 1 has been selected";
+								this->Ps[turn]->move2(6, 0,red[0]);
+								moved = true;
+								break;
+							}
+						}
+					}
+					else if (isSpriteHover(red[1].getGlobalBounds(), sf::Vector2f(evnt.mouseButton.x, evnt.mouseButton.y)) == true)
+					{
+						if (evnt.type == sf::Event::MouseButtonPressed && evnt.mouseButton.button == sf::Mouse::Left)
+						{
+							if (turn == 0)
+							{
+								cout << "\n Red 2 has been selected";
+								this->Ps[turn]->move2(6, 1, red[1]);
+								moved = true;
+								break;
+							}
+						}
+					}
+					else if (isSpriteHover(red[2].getGlobalBounds(), sf::Vector2f(evnt.mouseButton.x, evnt.mouseButton.y)) == true)
+					{
+						if (evnt.type == sf::Event::MouseButtonPressed && evnt.mouseButton.button == sf::Mouse::Left)
+						{
+							if (turn == 0)
+							{
+								cout << "\n Red 3 has been selected";
+								this->Ps[turn]->move2(6, 2, red[2]);
+								moved = true;
+								break;
+							}
+						}
+					}
+					else if (isSpriteHover(red[3].getGlobalBounds(), sf::Vector2f(evnt.mouseButton.x, evnt.mouseButton.y)) == true)
+					{
+						if (evnt.type == sf::Event::MouseButtonPressed && evnt.mouseButton.button == sf::Mouse::Left)
+						{
+							if (turn == 0)
+							{
+								cout << "\n Red 4 has been selected";
+								Ps[turn]->move2(6, 3, red[3]);
+								moved = true;
+								break;
+							}
+						}
+					}
+
+					else if (isSpriteHover(green[0].getGlobalBounds(), sf::Vector2f(evnt.mouseButton.x, evnt.mouseButton.y)) == true)
+					{
+						if (evnt.type == sf::Event::MouseButtonPressed && evnt.mouseButton.button == sf::Mouse::Left)
+						{
+							if (turn == 1)
+							{
+								cout << "\n green 1 has been selected";
+								this->Ps[turn]->move2(6, 0, green[0]);
+								moved = true;
+								break;
+							}
+						}
+					}
+					else if (isSpriteHover(green[1].getGlobalBounds(), sf::Vector2f(evnt.mouseButton.x, evnt.mouseButton.y)) == true)
+					{
+						if (evnt.type == sf::Event::MouseButtonPressed && evnt.mouseButton.button == sf::Mouse::Left)
+						{
+							if (turn == 1)
+							{
+								cout << "\n green 2 has been selected";
+								this->Ps[turn]->move2(6, 1, green[1]);
+								moved = true;
+								break;
+							}
+						}
+					}
+					else if (isSpriteHover(green[2].getGlobalBounds(), sf::Vector2f(evnt.mouseButton.x, evnt.mouseButton.y)) == true)
+					{
+						if (evnt.type == sf::Event::MouseButtonPressed && evnt.mouseButton.button == sf::Mouse::Left)
+						{
+							if (turn == 1)
+							{
+								cout << "\n green 3 has been selected";
+								this->Ps[turn]->move2(6, 2, green[2]);
+								moved = true;
+								break;
+							}
+						}
+					}
+					else if (isSpriteHover(green[3].getGlobalBounds(), sf::Vector2f(evnt.mouseButton.x, evnt.mouseButton.y)) == true)
+					{
+						if (evnt.type == sf::Event::MouseButtonPressed && evnt.mouseButton.button == sf::Mouse::Left)
+						{
+							if (turn == 1)
+							{
+								cout << "\n green 4 has been selected";
+								Ps[turn]->move2(6, 3, green[3]);
+								moved = true;
+								break;
+							}
+						}
+					}
+
+					else if (isSpriteHover(yellow[0].getGlobalBounds(), sf::Vector2f(evnt.mouseButton.x, evnt.mouseButton.y)) == true)
+					{
+						if (evnt.type == sf::Event::MouseButtonPressed && evnt.mouseButton.button == sf::Mouse::Left)
+						{
+							if (turn == 2)
+							{
+								cout << "\n yellow 1 has been selected";
+								this->Ps[turn]->move2(6, 0, yellow[0]);
+								moved = true;
+								break;
+							}
+						}
+						}
+					else if (isSpriteHover(yellow[1].getGlobalBounds(), sf::Vector2f(evnt.mouseButton.x, evnt.mouseButton.y)) == true)
+					{
+						if (evnt.type == sf::Event::MouseButtonPressed && evnt.mouseButton.button == sf::Mouse::Left)
+						{
+							if (turn == 2)
+							{
+								cout << "\n yellow 2 has been selected";
+								this->Ps[turn]->move2(6, 1, yellow[1]);
+								moved = true;
+								break;
+							}
+						}
+						}
+					else if (isSpriteHover(yellow[2].getGlobalBounds(), sf::Vector2f(evnt.mouseButton.x, evnt.mouseButton.y)) == true)
+					{
+						if (evnt.type == sf::Event::MouseButtonPressed && evnt.mouseButton.button == sf::Mouse::Left)
+						{
+							if (turn == 2)
+							{
+								cout << "\n green 3 has been selected";
+								this->Ps[turn]->move2(6, 2, yellow[2]);
+								moved = true;
+								break;
+							}
+						}
+					}
+					else if (isSpriteHover(yellow[3].getGlobalBounds(), sf::Vector2f(evnt.mouseButton.x, evnt.mouseButton.y)) == true)
+					{
+						if (evnt.type == sf::Event::MouseButtonPressed && evnt.mouseButton.button == sf::Mouse::Left)
+						{
+							if (turn == 2)
+							{
+								cout << "\n yellow 4 has been selected";
+								Ps[turn]->move2(6, 3, yellow[3]);
+								moved = true;
+								break;
+							}
+						}
+					}
+
+
+					else if (isSpriteHover(blue[0].getGlobalBounds(), sf::Vector2f(evnt.mouseButton.x, evnt.mouseButton.y)) == true)
+					{
+						if (evnt.type == sf::Event::MouseButtonPressed && evnt.mouseButton.button == sf::Mouse::Left)
+						{
+							if (turn == 3)
+							{
+								cout << "\n blue 1 has been selected";
+								this->Ps[turn]->move2(6, 0, blue[0]);
+								moved = true;
+								break;
+							}
+						}
+						}
+					else if (isSpriteHover(blue[1].getGlobalBounds(), sf::Vector2f(evnt.mouseButton.x, evnt.mouseButton.y)) == true)
+					{
+						if (evnt.type == sf::Event::MouseButtonPressed && evnt.mouseButton.button == sf::Mouse::Left)
+						{
+							if (turn == 3)
+							{
+								cout << "\n blue 2 has been selected";
+								this->Ps[turn]->move2(6, 1, blue[1]);
+								moved = true;
+								break;
+							}
+						}
+					}
+					else if (isSpriteHover(blue[2].getGlobalBounds(), sf::Vector2f(evnt.mouseButton.x, evnt.mouseButton.y)) == true)
+					{
+						if (evnt.type == sf::Event::MouseButtonPressed && evnt.mouseButton.button == sf::Mouse::Left)
+						{
+							if (turn == 3)
+							{
+								cout << "\n blue 3 has been selected";
+								this->Ps[turn]->move2(6, 2, blue[2]);
+								moved = true;
+								break;
+							}
+						}
+					}
+					else if (isSpriteHover(blue[3].getGlobalBounds(), sf::Vector2f(evnt.mouseButton.x, evnt.mouseButton.y)) == true)
+					{
+						if (evnt.type == sf::Event::MouseButtonPressed && evnt.mouseButton.button == sf::Mouse::Left)
+						{
+							if (turn == 3)
+							{
+								cout << "\n blue 4 has been selected";
+								Ps[turn]->move2(6, 3, blue[3]);
+								moved = true;
+								break;
+							}
+						}
+					}
+					
+					
+					window.clear(sf::Color::Black);
+					sprite.setPosition(sf::Vector2f(50, 300));
+
+					window.draw(sprite);
+
+					//window.display();
+
+				}
 			}
 		}
 	}
+
 }
+

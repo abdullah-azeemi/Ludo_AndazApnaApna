@@ -21,10 +21,10 @@ protected :
 	int piecesonBoard;
 	vector<int> initPos;  // initPos actually stores the Piece's location ,
                                    	//initialiy it will be -1 and ther will be 4 indiceis (0-3)
+	bool isValidSource;
 	
 
 public:
-
 	Player(string _Name, Color _C, int _start_Pos, int _end_Pos, int _diceWin_Pos, char* _sym, vector<int> _initPos, int piecesH, int piecesJ, int piecesB);
 	string getName();
 	Color getColor();
@@ -38,7 +38,9 @@ public:
 	int getPos(int index);
 	vector<int>getPositions();
 	void getOutofHome(int turn, int nop);
-	void move(int number, int indexPiece);
+	void move(int number, int diceRolled_number, int turn);
+
+	void move2(int diceRolled_number, int index, sf::Sprite &s);
 
 };
 
