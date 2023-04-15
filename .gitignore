@@ -361,3 +361,5 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/Ludo_AndazApnaApna/Ludo_AndazApnaApna.vcxproj.filters
+/Ludo_AndazApnaApna/Ludo_AndazApnaApna.vcxproj
