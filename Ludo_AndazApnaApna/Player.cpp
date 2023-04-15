@@ -165,7 +165,7 @@ void Player::move2(int diceRolled_number, int index, sf::Sprite & s)
 			{
 				int y = 0;
 				y = loc % get_diceWin_Pos();
-				initPos[index] = getHomePos() + y;
+				initPos[index] = getHomePos() + y-1;
 				kuchHua = true;
 			}
 		}
@@ -174,10 +174,12 @@ void Player::move2(int diceRolled_number, int index, sf::Sprite & s)
 			if (initPos[index] < get_StartPos())
 			{
 				int y = 0;
-				y = loc - get_diceWin_Pos();
+				y = loc - Player::get_diceWin_Pos();
+				int y1 = Player::get_diceWin_Pos();
 				if (y > 0)
 				{
 					initPos[index] = getHomePos() + y-1;
+					kuchHua = true;
 				}
 			}
 		}

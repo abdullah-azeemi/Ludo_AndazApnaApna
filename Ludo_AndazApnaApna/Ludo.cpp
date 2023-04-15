@@ -26,7 +26,7 @@ Ludo::Ludo()
 		vector<int> initPositions1 = { -1,-2,-3,-4 };
 		vector<int> initPositions2 = { -11,-12,-13,-14 };
 		vector<int> initPositions3 = { -21,-22,-23,-24 };
-		vector<int> initPositions4 = { -31,-32,-33,-34 };
+		vector<int> initPositions4 = { 31,-32,-33,-34 };
 		/// Initializing all the players 
 		char sym1[4] = { 'b1', 'b2', 'b3','b4' };
 		this->Ps[0] = new Player("Player 1", Color(RED), 1, 9, 52, sym1, initPositions1, 0, 4, 0, 101);
@@ -282,7 +282,7 @@ void Ludo::Play()
 				{
 					if (moved)
 					{
-						//turnChange();
+						turnChange();
 						cout << "turn is " << turn;
 						moved = false;
 					}

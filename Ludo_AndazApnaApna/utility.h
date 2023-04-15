@@ -289,17 +289,17 @@ static void returnLocforBoard(int number, int& ri, int& ci)
 	                                    780,825,870,915,960,1005,1005,1005,960,915,870,825, 780 ,735,735,735,735,735,735,690,667};
 
 
-	vector<int> homeGreen_ri = { 363 , 363 , 363 , 363 , 363 };
-	vector<int> homeGreen_ci = { 441 , 493 , 526 , 570 , 620 };
+	vector<int> homeGreen_ri = { 347 , 347 , 347 , 347 , 347 };
+	vector<int> homeGreen_ci = { 435 , 480, 515 , 560 , 605 };
 
-	vector<int> homeRed_ri = {626 , 528 , 537 , 496 , 452  };
-	vector<int> homeRed_ci = { 703 , 703 , 703 , 703 , 703 };
+	vector<int> homeRed_ri = { 620 , 575 , 520 , 485 , 440  };
+	vector<int> homeRed_ci = { 690 , 690 , 690 , 690 , 690 };
 
-	vector<int> homeYellow_ri = { 92 , 135 , 183 , 222 , 273 };
-	vector<int> homeYellow_ci = { 703 , 703 , 703 , 703 , 703 };
+	vector<int> homeYellow_ri = { 82 , 125 , 173 , 212 , 263 };
+	vector<int> homeYellow_ci = { 695 , 695 , 695 , 695 , 695 };
 
-	vector<int> homeBlue_ri = { 363 , 363 , 363 , 363 , 363};
-	vector<int> homeBlue_ci = { 974 , 926 , 884 ,839, 793 };
+	vector<int> homeBlue_ri = { 350 , 350 , 350 , 350 , 350 };
+	vector<int> homeBlue_ci = { 964 , 916 , 874 ,829, 783 };
 
 	if (number <= -1 && number >= -4)
 	{
@@ -330,19 +330,19 @@ static void returnLocforBoard(int number, int& ri, int& ci)
 		ri = homeRed_ri[(abs(number) / 100) - 1 + x];
 		ci = homeRed_ci[(abs(number) / 100) - 1 + x];
 	}
-	else if (number >= 201 && number <= 205)
+	else if (number >= 201 && number <= 206)
 	{
 		int x = abs(number) % 200 - 1;
 		ri = homeGreen_ri[(abs(number) / 200) - 1 + x];
 		ci = homeGreen_ci[(abs(number) / 200) - 1 + x];
 	}
-	else if (number >= 301 && number <= 305)
+	else if (number >= 301 && number <= 306)
 	{
 		int x = abs(number) % 300 - 1;
 		ri = homeYellow_ri[(abs(number) / 300) - 1 + x];
 		ci = homeYellow_ci[(abs(number) / 300) - 1 + x];
 	}
-	else if (number >= 401 && number <= 405)
+	else if (number >= 401 && number <= 406)
 	{
 		int x = abs(number) % 400 - 1;
 		ri = homeBlue_ri[(abs(number) / 400) - 1 + x];
