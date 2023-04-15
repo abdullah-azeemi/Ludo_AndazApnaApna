@@ -249,8 +249,7 @@ void Ludo::Play()
 	if (true)
 	{
 		if (true)
-		{
-			
+		{	
 			sf::RenderWindow window(sf::VideoMode(1440, 720), "Ludo Game", sf::Style::Close | sf::Style::Resize);
 			
 			turn = 0;
@@ -283,7 +282,7 @@ void Ludo::Play()
 				{
 					if (moved)
 					{
-						turnChange();
+						//turnChange();
 						cout << "turn is " << turn;
 						moved = false;
 					}
@@ -348,7 +347,7 @@ void Ludo::Play()
 							if (turn == 0)
 							{
 								cout << "\n Red 1 has been selected";
-								this->Ps[turn]->move2(6, 0,red[0]);
+								this->Ps[turn]->move2(1, 0,red[0]);
 								moved = true;
 								break;
 							}

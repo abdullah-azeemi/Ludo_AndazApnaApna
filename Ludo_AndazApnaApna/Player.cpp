@@ -151,7 +151,16 @@ void Player::move2(int diceRolled_number, int index, sf::Sprite & s)
 {
 	if (initPos[index] >= 0)
 	{
-		initPos[index] += diceRolled_number;
+		int loc = initPos[index] + diceRolled_number;
+		if (loc > 53)
+		{
+			loc = loc / 53;
+			initPos[index] = loc;
+		}
+		else
+		{
+			initPos[index] += diceRolled_number;
+		}
 	}
 	else
 	{
