@@ -324,6 +324,30 @@ static void returnLocforBoard(int number, int& ri, int& ci)
 		ri = Blueri[(abs(number)/30) - 1 + x];
 		ci = Blueci[(abs(number)/30) - 1 + x];
 	}
+	else if (number <= -101 && number >= -105)
+	{
+		int x = abs(number) % 100 - 1;
+		ri = homeRed_ri[(abs(number) / 100) - 1 + x];
+		ci = homeRed_ci[(abs(number) / 100) - 1 + x];
+	}
+	else if (number <= -201 && number >= -205)
+	{
+		int x = abs(number) % 200 - 1;
+		ri = homeGreen_ri[(abs(number) / 200) - 1 + x];
+		ci = homeGreen_ci[(abs(number) / 200) - 1 + x];
+	}
+	else if (number <= -301 && number >= -305)
+	{
+		int x = abs(number) % 300 - 1;
+		ri = homeYellow_ri[(abs(number) / 300) - 1 + x];
+		ci = homeYellow_ci[(abs(number) / 300) - 1 + x];
+	}
+	else if (number <= -401 && number >= -405)
+	{
+		int x = abs(number) % 400 - 1;
+		ri = homeBlue_ri[(abs(number) / 400) - 1 + x];
+		ci = homeBlue_ci[(abs(number) / 400) - 1 + x];
+	}
 	else
 	{
 		ri = all_Ri_Locations[number];
