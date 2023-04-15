@@ -13,6 +13,7 @@ private:
 	int start_Pos;
 	int end_Pos;
 	int diceWin_Pos;
+	int Home_Pos;
 	char* Sym;
 		
 protected :
@@ -25,7 +26,7 @@ protected :
 	
 
 public:
-	Player(string _Name, Color _C, int _start_Pos, int _end_Pos, int _diceWin_Pos, char* _sym, vector<int> _initPos, int piecesH, int piecesJ, int piecesB);
+	Player(string _Name, Color _C, int _start_Pos, int _end_Pos, int _diceWin_Pos, char* _sym, vector<int> _initPos, int piecesH, int piecesJ, int piecesB, int getHomePos);
 	string getName();
 	Color getColor();
 	int get_StartPos();
@@ -35,6 +36,7 @@ public:
 	int getpiecesAtHome();
 	int getpiecesAtJail();
 	int getpiecesonBoard();
+	int getHomePos();
 	int getPos(int index);
 	vector<int>getPositions();
 	void getOutofHome(int turn, int nop);

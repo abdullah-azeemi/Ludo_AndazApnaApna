@@ -29,16 +29,16 @@ Ludo::Ludo()
 		vector<int> initPositions4 = { -31,-32,-33,-34 };
 		/// Initializing all the players 
 		char sym1[4] = { 'b1', 'b2', 'b3','b4' };
-		this->Ps[0] = new Player("Player 1", Color(RED), 1, 9, 52, sym1, initPositions1, 0, 4, 0);
+		this->Ps[0] = new Player("Player 1", Color(RED), 1, 9, 52, sym1, initPositions1, 0, 4, 0, 101);
 
 		char sym2[4] = { 'r1', 'r2', 'r3','r4' };
-		this->Ps[1] = new Player("Player 2", Color(GREEN), 14, 22, 12, sym1, initPositions2, 0, 4, 0);
+		this->Ps[1] = new Player("Player 2", Color(GREEN), 14, 22, 12, sym1, initPositions2, 0, 4, 201);
 
 		char sym3[4] = { 'y1', 'y2', 'y3','y4' };
-		this->Ps[2] = new Player("Player 3", Color(YELLOW), 27, 35, 25, sym1, initPositions3, 0, 4, 0);
+		this->Ps[2] = new Player("Player 3", Color(YELLOW), 27, 35, 25, sym1, initPositions3, 0, 4, 0,301);
 
 		char sym4[4] = { 'm1', 'm2', 'm3','m4' };
-		this->Ps[3] = new Player("Player 4", Color(BLUE), 40, 48, 38, sym1, initPositions4, 0, 4, 0);
+		this->Ps[3] = new Player("Player 4", Color(BLUE), 40, 48, 38, sym1, initPositions4, 0, 4, 0,401);
 
 	}
 	else if (Nop == 6)
@@ -46,22 +46,22 @@ Ludo::Ludo()
 		vector<int> initPositions = { -1,-1,-1,-1 };
 		/// Initializing all the players 
 		char sym1[4] = { 'b1', 'b2', 'b3','b4' };
-		this->Ps[0] = new Player("Player 1", Color(BLUE), 1, 9, 89, sym1, initPositions, 0, 4, 0);
+		this->Ps[0] = new Player("Player 1", Color(BLUE), 1, 9, 89, sym1, initPositions, 0, 4, 0,101);
 
 		char sym2[4] = { 'r1', 'r2', 'r3','r4' };
-		this->Ps[1] = new Player("Player 2", Color(RED), 14, 22, 12, sym1, initPositions, 0, 4, 0);
+		this->Ps[1] = new Player("Player 2", Color(RED), 14, 22, 12, sym1, initPositions, 0, 4, 0,201);
 
 		char sym3[4] = { 'y1', 'y2', 'y3','y4' };
-		this->Ps[2] = new Player("Player 3", Color(YELLOW), 37, 35, 25, sym1, initPositions, 0, 4, 0);
+		this->Ps[2] = new Player("Player 3", Color(YELLOW), 37, 35, 25, sym1, initPositions, 0, 4, 0,301);
 
 		char sym4[4] = { 'm1', 'm2', 'm3','m4' };
-		this->Ps[3] = new Player("Player 4", Color(MAGENTA), 46, 54, 44, sym1, initPositions, 0, 4, 0);
+		this->Ps[3] = new Player("Player 4", Color(MAGENTA), 46, 54, 44, sym1, initPositions, 0, 4, 0,401);
 
 		char sym5[4] = { 'g1', 'g2', 'g3','g4' };
-		this->Ps[4] = new Player("Player 5", Color(GREEN), 59, 67, 57, sym1, initPositions, 0, 4, 0);
+		this->Ps[4] = new Player("Player 5", Color(GREEN), 59, 67, 57, sym1, initPositions, 0, 4, 0,501);
 
 		char sym6[4] = { 'dg1', 'dg2', 'dg3','dg4' };
-		this->Ps[5] = new Player("Player 6", Color(DARKGREY), 72, 80, 70, sym1, initPositions, 0, 4, 0);
+		this->Ps[5] = new Player("Player 6", Color(DARKGREY), 72, 80, 70, sym1, initPositions, 0, 4, 0,601);
 	}
 	
 	this->turn = 0;
@@ -123,7 +123,7 @@ void Ludo::Play()
 		int ri, ci;
 		while (window.isOpen())
 		{
-			print6(window);
+			print4(window);
 			sf::Event evnt;
 			while (window.pollEvent(evnt))
 			{
@@ -147,7 +147,7 @@ void Ludo::Play()
 					if (evnt.mouseButton.button == sf::Mouse::Left) {
 						ri = evnt.mouseButton.y;
 						ci = evnt.mouseButton.x;
-						//cout << "\n row is : " << ri << " col is : " << ci;
+						cout << "\n row is : " << ri << " col is : " << ci;
 						int x = returnIndexforBoardfor4Board(ci, ri);
 						//cout << "\n Index is : " << x;
 					}

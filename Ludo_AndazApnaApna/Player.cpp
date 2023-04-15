@@ -1,7 +1,7 @@
 #include "Player.h"
 #include"utility.h"
 
-Player::Player(string _Name, Color _C, int _start_Pos, int _end_Pos, int _diceWin_Pos, char* _sym, vector<int> _initPos, int piecesH, int piecesJ, int piecesB)
+Player::Player(string _Name, Color _C, int _start_Pos, int _end_Pos, int _diceWin_Pos, char* _sym, vector<int> _initPos, int piecesH, int piecesJ, int piecesB, int getHomePos)
 {
 	this->Name = _Name;
 	this->C = _C;
@@ -14,6 +14,7 @@ Player::Player(string _Name, Color _C, int _start_Pos, int _end_Pos, int _diceWi
 	this->piecesAtJail = piecesJ;
 	this->piecesonBoard = piecesB;
 	this->isValidSource = false;
+	this->Home_Pos = getHomePos;
 }
 string Player:: getName()
 {
@@ -50,6 +51,10 @@ int Player::getpiecesAtJail()
 int Player::getpiecesonBoard()
 {
 	return this->piecesonBoard;
+}
+int Player::getHomePos()
+{
+	this->getHomePos();
 }
 void Player::getOutofHome(int turn, int nop)
 {
@@ -149,17 +154,44 @@ vector<int>Player::getPositions()
 }
 void Player::move2(int diceRolled_number, int index, sf::Sprite & s)
 {
+	bool kuchHua = false;
+
 	if (initPos[index] >= 0)
 	{
 		int loc = initPos[index] + diceRolled_number;
-		if (loc > 53)
+		if (Player::get_diceWin_Pos() == 52)
 		{
-			loc = loc / 53;
-			initPos[index] = loc;
+			if (loc > Player::get_diceWin_Pos())
+			{
+				int y = 0;
+				y = loc % get_diceWin_Pos();
+				initPos[index] = get_diceWin_Pos() + y;
+				kuchHua = true;
+			}
 		}
-		else
+		else 
 		{
-			initPos[index] += diceRolled_number;
+			if (initPos[index] < get_StartPos())
+			{
+				int y = 0;
+				y = loc - get_diceWin_Pos();
+				if (y > 0)
+				{
+					initPos[index] = getHomePos() + y-1;
+				}
+			}
+		}
+		if (kuchHua == false)
+		{
+			if (loc > 53)
+			{
+				loc = loc / 53;
+				initPos[index] = loc;
+			}
+			else
+			{
+				initPos[index] += diceRolled_number;
+			}
 		}
 	}
 	else
@@ -172,6 +204,4 @@ void Player::move2(int diceRolled_number, int index, sf::Sprite & s)
 	int ri = 0, ci = 0;
 	returnLocforBoard(initPos[index], ri, ci);
 	s.setPosition(ci,ri);
-
-	
 }
