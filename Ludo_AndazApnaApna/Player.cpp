@@ -156,7 +156,7 @@ void Player::move2(int diceRolled_number, int index, sf::Sprite & s)
 {
 	bool kuchHua = false;
 
-	if (initPos[index] >= 0)
+	if (initPos[index] >= 0 )
 	{
 		int loc = initPos[index] + diceRolled_number;
 		if (Player::get_diceWin_Pos() == 52)
