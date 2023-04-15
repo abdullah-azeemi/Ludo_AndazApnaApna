@@ -288,6 +288,19 @@ static void returnLocforBoard(int number, int& ri, int& ci)
 		                               423,468,513,558,603,648, 645,645,645,645,645,645,  690, 735,  735,735,735,735,735,
 	                                    780,825,870,915,960,1005,1005,1005,960,915,870,825, 780 ,735,735,735,735,735,735,690,667};
 
+
+	vector<int> homeGreen_ri = { 363 , 363 , 363 , 363 , 363 };
+	vector<int> homeGreen_ci = { 441 , 493 , 526 , 570 , 620 };
+
+	vector<int> homeRed_ri = {626 , 528 , 537 , 496 , 452  };
+	vector<int> homeRed_ci = { 703 , 703 , 703 , 703 , 703 };
+
+	vector<int> homeYellow_ri = { 92 , 135 , 183 , 222 , 273 };
+	vector<int> homeYellow_ci = { 703 , 703 , 703 , 703 , 703 };
+
+	vector<int> homeBlue_ri = { 363 , 363 , 363 , 363 , 363};
+	vector<int> homeBlue_ci = { 974 , 926 , 884 ,839, 793 };
+
 	if (number <= -1 && number >= -4)
 	{
 		ri = Redri[abs(number) - 1];
