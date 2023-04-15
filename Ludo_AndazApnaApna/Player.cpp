@@ -54,7 +54,7 @@ int Player::getpiecesonBoard()
 }
 int Player::getHomePos()
 {
-	this->getHomePos();
+	return this->Home_Pos;
 }
 void Player::getOutofHome(int turn, int nop)
 {
@@ -165,7 +165,7 @@ void Player::move2(int diceRolled_number, int index, sf::Sprite & s)
 			{
 				int y = 0;
 				y = loc % get_diceWin_Pos();
-				initPos[index] = get_diceWin_Pos() + y;
+				initPos[index] = getHomePos() + y;
 				kuchHua = true;
 			}
 		}

@@ -32,7 +32,7 @@ Ludo::Ludo()
 		this->Ps[0] = new Player("Player 1", Color(RED), 1, 9, 52, sym1, initPositions1, 0, 4, 0, 101);
 
 		char sym2[4] = { 'r1', 'r2', 'r3','r4' };
-		this->Ps[1] = new Player("Player 2", Color(GREEN), 14, 22, 12, sym1, initPositions2, 0, 4, 201);
+		this->Ps[1] = new Player("Player 2", Color(GREEN), 14, 22, 12, sym1, initPositions2, 0, 4,0, 201);
 
 		char sym3[4] = { 'y1', 'y2', 'y3','y4' };
 		this->Ps[2] = new Player("Player 3", Color(YELLOW), 27, 35, 25, sym1, initPositions3, 0, 4, 0,301);
