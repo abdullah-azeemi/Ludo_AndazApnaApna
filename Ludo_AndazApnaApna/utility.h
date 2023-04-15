@@ -353,6 +353,7 @@ static void returnLocforBoard(int number, int& ri, int& ci)
 		ri = all_Ri_Locations[number];
 		ci = all_Ci_Locations[number];
 	}
+
 }
 
 static void printAllPieces(sf::RenderWindow& window, Player** Ps, vector<sf::Sprite> & red, vector<sf::Sprite> & yellow, vector<sf::Sprite> & blue, vector<sf::Sprite> &green)
