@@ -9,17 +9,29 @@ vector<int> Dice::rollDice()
 	rollsS.push_back(number);
 	if (number == 6)
 	{
+		srand(time(0));
 		number = (rand() % 6) + 1;
 		rolls++;
 		rollsS.push_back(number);
-		if(number != 6)
+		if(number == 6)
 		{
+			srand(time(0));
 			number = (rand() % 6) + 1;
-			rollsS.push_back(number);
+			if (number == 6)
+			{
+				rollsS.empty();
+				rollsS.clear();
+			}
+			else
+			{
+				rollsS.push_back(number);
+			}
+			
+			
 		}
 		else
 		{
-			rollsS.empty();
+			//rollsS.push_back(number);
 		}
 	}
 	return rollsS;

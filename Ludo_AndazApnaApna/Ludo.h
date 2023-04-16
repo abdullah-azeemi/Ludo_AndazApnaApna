@@ -16,6 +16,7 @@ private:
 	int indexForMaxRolls;
 	bool hasDice_rolled;
 	bool moved;
+	bool hasDice_displayed;
 
 public:
 	Ludo();

@@ -26,7 +26,7 @@ Ludo::Ludo()
 		vector<int> initPositions1 = { -1,-2,-3,-4 };
 		vector<int> initPositions2 = { -11,-12,-13,-14 };
 		vector<int> initPositions3 = { -21,-22,-23,-24 };
-		vector<int> initPositions4 = { 31,-32,-33,-34 };
+		vector<int> initPositions4 = { -31,-32,-33,-34 };
 		/// Initializing all the players 
 		char sym1[4] = { 'b1', 'b2', 'b3','b4' };
 		this->Ps[0] = new Player("Player 1", Color(RED), 1, 9, 52, sym1, initPositions1, 0, 4, 0, 101);
@@ -68,6 +68,7 @@ Ludo::Ludo()
 	this->indexForMaxRolls = 0;
 	this->hasDice_rolled = false;
 	this->moved = false;
+	this->hasDice_displayed = false;
 
 }
 void Ludo::displayTurnMsg(Player* P1)
@@ -85,6 +86,7 @@ void Ludo::Play()
 	vector <sf::Sprite> blue;
 	vector <sf::Sprite> green;
 	vector <sf::Sprite> yellow;
+	vector <sf::Sprite> dice;
 
 	int x = 0, y = 0, z;
 	while (false)
@@ -115,7 +117,7 @@ void Ludo::Play()
 		cin >> z;
 	}
 
-	if (false)
+	if (0)
 	{
 
 		sf::RenderWindow window(sf::VideoMode(1440, 720), "Ludo Game", sf::Style::Close | sf::Style::Resize);
@@ -123,7 +125,8 @@ void Ludo::Play()
 		int ri, ci;
 		while (window.isOpen())
 		{
-			print4(window);
+			print6(window);
+			
 			sf::Event evnt;
 			while (window.pollEvent(evnt))
 			{
@@ -150,6 +153,7 @@ void Ludo::Play()
 						cout << "\n row is : " << ri << " col is : " << ci;
 						int x = returnIndexforBoardfor4Board(ci, ri);
 						//cout << "\n Index is : " << x;
+						printAllPieces(window, Ps, red, yellow, blue, green);
 					}
 					break;
 
@@ -169,8 +173,8 @@ void Ludo::Play()
 		int ri, ci;
 		while (window.isOpen())
 		{
-			print4(window);
-			printAllPieces(window, this->Ps, red, yellow, blue, green);
+			print6(window);
+			//printAllPieces(window, this->Ps, red, yellow, blue, green);
 
 			indexForMaxRolls = 0;
 
@@ -243,10 +247,12 @@ void Ludo::Play()
 				window.clear();
 			}
 			turnChange();
+
 		}
+		window.display();
 	}
 
-	if (true)
+	if (1)
 	{
 		if (true)
 		{	
@@ -318,10 +324,14 @@ void Ludo::Play()
 					{
 						if (evnt.type == sf::Event::MouseButtonReleased && evnt.mouseButton.button == sf::Mouse::Left)
 						{
+							hasDice_displayed = false;
 							cout << "\n Turn : " << turn << " Dice rolled : ";
 							vector<int> x = D->rollDice();
 							ostream_iterator <int>output(cout, ", ");
 							copy(x.begin(), x.end(), output);
+							printDice(window, this->Ps, x, dice, hasDice_displayed);
+							window.clear();
+							//hasDice_displayed = true;
 							hasDice_rolled = true;
 						}
 					}
