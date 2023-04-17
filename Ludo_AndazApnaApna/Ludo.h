@@ -24,5 +24,6 @@ public:
 	void Play();
 	void turnChange();
 	void kill(Player* Ps[6]);
+	int getDiceSelection(sf::RenderWindow & window, std::vector<sf::Sprite>& dice, std::vector<int> & x);
 };
 

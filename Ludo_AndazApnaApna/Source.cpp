@@ -9,7 +9,7 @@ using namespace std;
 
 int main()
 {
-	int nop = 6;
+	int nop = 4;
 	Ludo C(nop);
 	C.Play();
 
