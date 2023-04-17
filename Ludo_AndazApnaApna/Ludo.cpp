@@ -215,7 +215,7 @@ void Ludo::Play()
 		window.display();
 	}
 
-	if (0)
+	if (1)
 	{
 		vector <sf::Sprite> red;
 		vector <sf::Sprite> blue;
@@ -244,6 +244,7 @@ void Ludo::Play()
 			vector<sf::Sprite> gr;
 			gr.push_back(sprite);
 
+			int drn = 0;
 			while (window.isOpen())
 			{
 				print4(window);
@@ -299,9 +300,11 @@ void Ludo::Play()
 							ostream_iterator <int>output(cout, ", ");
 							copy(x.begin(), x.end(), output);
 							printDice(window, this->Ps, x, dice, hasDice_displayed);
-							window.clear();
+							//window.clear();
 							//hasDice_displayed = true;
 							hasDice_rolled = true;
+							drn = getDiceSelection(window, dice,x);
+							cout << "\nDice : " << drn;
 						}
 					}
 					/*while (window.pollEvent(evnt))
@@ -563,7 +566,7 @@ void Ludo::Play()
 			}
 		}
 	}
-	if (1)
+	if (0)
 	{
 		vector <sf::Sprite> red;
 		vector <sf::Sprite> blue;
@@ -600,6 +603,7 @@ void Ludo::Play()
 				printAllPieces2(window, this->Ps, red, yellow, blue, green,magenda, grey, Nop);
 				indexForMaxRolls = 0;
 				sf::Event evnt;
+
 				while (window.pollEvent(evnt))
 				{
 					if (moved)
@@ -1102,4 +1106,31 @@ void Ludo::kill(Player* Ps[6])
 			Ps[ri]->update_the_Pos(pos);
 		}
 	}
+}
+int Ludo::getDiceSelection(sf::RenderWindow & window, std::vector<sf::Sprite> &dice, std::vector<int> & x)
+{
+	int number = 0;
+	bool isPiece_selected = false;
+	while (!isPiece_selected)
+	{
+		sf::Event evnt2;
+		while (window.pollEvent(evnt2))
+		{
+			print4(window);
+			
+			if (isSpriteHover(dice[0].getGlobalBounds(), sf::Vector2f(evnt2.mouseButton.x, evnt2.mouseButton.y)) == true)
+			{
+				if (evnt2.type == sf::Event::MouseButtonReleased && evnt2.mouseButton.button == sf::Mouse::Left)
+				{
+					cout << "Dice 1 : Selected ";
+					isPiece_selected = true;
+					return x[0];
+
+					break;
+			    }
+		    }
+		}
+	}
+	dice.clear();
+	return number;
 }
