@@ -52,24 +52,23 @@ Ludo::Ludo(int nop)
 		vector<int> initPositions6 = { -51,-52,-53,-54 };
 		/// Initializing all the players 
 		char sym1[4] = { 'b1', 'b2', 'b3','b4' };
-		this->Ps[0] = new Player("Player 1", Color(RED), 1, 9, 89, sym1, initPositions1, 0, 4, 0,101);
+		this->Ps[0] = new Player("Player 1", Color(RED), 1, 9, 78, sym1, initPositions1, 0, 4, 0,101);
 
 		char sym2[4] = { 'r1', 'r2', 'r3','r4' };
 		this->Ps[1] = new Player("Player 2", Color(MAGENTA), 14, 22, 12, sym1, initPositions2, 0, 4, 0,201);
 
 		char sym3[4] = { 'y1', 'y2', 'y3','y4' };
-		this->Ps[2] = new Player("Player 3", Color(BLUE), 37, 35, 25, sym1, initPositions3, 0, 4, 0,301);
+		this->Ps[2] = new Player("Player 3", Color(BLUE), 27, 36, 25, sym1, initPositions3, 0, 4, 0,301);
 
 		char sym4[4] = { 'm1', 'm2', 'm3','m4' };
-		this->Ps[3] = new Player("Player 4", Color(GREEN), 46, 54, 44, sym1, initPositions4, 0, 4, 0,401);
+		this->Ps[3] = new Player("Player 4", Color(GREEN), 41, 49, 39, sym1, initPositions4, 0, 4, 0,401);
 
 		char sym5[4] = { 'g1', 'g2', 'g3','g4' };
-		this->Ps[4] = new Player("Player 5", Color(YELLOW), 59, 67, 57, sym1, initPositions5, 0, 4, 0,501);
+		this->Ps[4] = new Player("Player 5", Color(YELLOW), 54, 62, 52, sym1, initPositions5, 0, 4, 0,501);
 
 		char sym6[4] = { 'dg1', 'dg2', 'dg3','dg4' };
-		this->Ps[5] = new Player("Player 6", Color(DARKGREY), 72, 80, 70, sym1, initPositions6, 0, 4, 0,601);
+		this->Ps[5] = new Player("Player 6", Color(DARKGREY), 67, 75, 65, sym1, initPositions6, 0, 4, 0,601);
 
-		vector<int>saveC = { };
 	}
 	
 	this->turn = 0;
@@ -92,6 +91,7 @@ void Ludo::Play()
 
 	vector <sf::Sprite> dice;
 	vector<int> saveC = { 1,12,14,25,27,38,40,52 };
+	vector<int>saveC6 = {1,9,14,22,27,36,41,49,54,62,67,75 };
 
 	int x = 0, y = 0, z;
 	while (false)
@@ -345,6 +345,7 @@ void Ludo::Play()
 								cout << "\n Red 2 has been selected";
 								this->Ps[turn]->move2(6, 1, red[1],Nop);
 								moved = true;
+								kill(Ps);
 								break;
 							}
 						}
@@ -358,6 +359,7 @@ void Ludo::Play()
 								cout << "\n Red 3 has been selected";
 								this->Ps[turn]->move2(6, 2, red[2],Nop);
 								moved = true;
+								kill(Ps);
 								break;
 							}
 						}
@@ -371,6 +373,7 @@ void Ludo::Play()
 								cout << "\n Red 4 has been selected";
 								Ps[turn]->move2(6, 3, red[3],Nop);
 								moved = true;
+								kill(Ps);
 								break;
 							}
 						}
@@ -385,6 +388,7 @@ void Ludo::Play()
 								cout << "\n green 1 has been selected";
 								this->Ps[turn]->move2(6, 0, green[0],Nop);
 								moved = true;
+								kill(Ps);
 								break;
 							}
 						}
@@ -398,6 +402,7 @@ void Ludo::Play()
 								cout << "\n green 2 has been selected";
 								this->Ps[turn]->move2(6, 1, green[1],Nop);
 								moved = true;
+								kill(Ps);
 								break;
 							}
 						}
@@ -411,6 +416,7 @@ void Ludo::Play()
 								cout << "\n green 3 has been selected";
 								this->Ps[turn]->move2(6, 2, green[2],Nop);
 								moved = true;
+								kill(Ps);
 								break;
 							}
 						}
@@ -424,6 +430,7 @@ void Ludo::Play()
 								cout << "\n green 4 has been selected";
 								Ps[turn]->move2(6, 3, green[3],Nop);
 								moved = true;
+								kill(Ps);
 								break;
 							}
 						}
@@ -438,6 +445,7 @@ void Ludo::Play()
 								cout << "\n yellow 1 has been selected";
 								this->Ps[turn]->move2(6, 0, yellow[0],Nop);
 								moved = true;
+								kill(Ps);
 								break;
 							}
 						}
@@ -451,6 +459,7 @@ void Ludo::Play()
 								cout << "\n yellow 2 has been selected";
 								this->Ps[turn]->move2(6, 1, yellow[1],Nop);
 								moved = true;
+								kill(Ps);
 								break;
 							}
 						}
@@ -464,6 +473,7 @@ void Ludo::Play()
 								cout << "\n green 3 has been selected";
 								this->Ps[turn]->move2(6, 2, yellow[2],Nop);
 								moved = true;
+								kill(Ps);
 								break;
 							}
 						}
@@ -477,6 +487,7 @@ void Ludo::Play()
 								cout << "\n yellow 4 has been selected";
 								Ps[turn]->move2(6, 3, yellow[3],Nop);
 								moved = true;
+								kill(Ps);
 								break;
 							}
 						}
@@ -492,6 +503,7 @@ void Ludo::Play()
 								cout << "\n blue 1 has been selected";
 								this->Ps[turn]->move2(6, 0, blue[0],Nop);
 								moved = true;
+								kill(Ps);
 								break;
 							}
 						}
@@ -505,6 +517,7 @@ void Ludo::Play()
 								cout << "\n blue 2 has been selected";
 								this->Ps[turn]->move2(6, 1, blue[1],Nop);
 								moved = true;
+								kill(Ps);
 								break;
 							}
 						}
@@ -518,6 +531,7 @@ void Ludo::Play()
 								cout << "\n blue 3 has been selected";
 								this->Ps[turn]->move2(6, 2, blue[2],Nop);
 								moved = true;
+								kill(Ps);
 								break;
 							}
 						}
@@ -531,6 +545,7 @@ void Ludo::Play()
 								cout << "\n blue 4 has been selected";
 								Ps[turn]->move2(6, 3, blue[3],Nop);
 								moved = true;
+								kill(Ps);
 								break;
 							}
 						}
@@ -589,12 +604,10 @@ void Ludo::Play()
 				{
 					if (moved)
 					{
-						//turnChange();
+						turnChange();
 						cout << "turn is " << turn;
 						moved = false;
 					}
-
-
 
 					switch (evnt.type)
 					{
@@ -711,11 +724,117 @@ void Ludo::Play()
 						}
 					}
 
-					else if (isSpriteHover(green[0].getGlobalBounds(), sf::Vector2f(evnt.mouseButton.x, evnt.mouseButton.y)) == true)
+					else if (isSpriteHover(magenda[0].getGlobalBounds(), sf::Vector2f(evnt.mouseButton.x, evnt.mouseButton.y)) == true)
 					{
 						if (evnt.type == sf::Event::MouseButtonPressed && evnt.mouseButton.button == sf::Mouse::Left)
 						{
 							if (turn == 1)
+							{
+								cout << "\n magenda 1 has been selected";
+								this->Ps[turn]->move2(6, 0, magenda[0], Nop);
+								moved = true;
+								break;
+							}
+						}
+					}
+					else if (isSpriteHover(magenda[1].getGlobalBounds(), sf::Vector2f(evnt.mouseButton.x, evnt.mouseButton.y)) == true)
+					{
+						if (evnt.type == sf::Event::MouseButtonPressed && evnt.mouseButton.button == sf::Mouse::Left)
+						{
+							if (turn == 1)
+							{
+								cout << "\n magenda 2 has been selected";
+								this->Ps[turn]->move2(6, 1, magenda[1], Nop);
+								moved = true;
+								break;
+							}
+						}
+					}
+					else if (isSpriteHover(magenda[2].getGlobalBounds(), sf::Vector2f(evnt.mouseButton.x, evnt.mouseButton.y)) == true)
+					{
+						if (evnt.type == sf::Event::MouseButtonPressed && evnt.mouseButton.button == sf::Mouse::Left)
+						{
+							if (turn == 1)
+							{
+								cout << "\n magenda 3 has been selected";
+								this->Ps[turn]->move2(6, 2, magenda[2], Nop);
+								moved = true;
+								break;
+							}
+						}
+					}
+					else if (isSpriteHover(magenda[3].getGlobalBounds(), sf::Vector2f(evnt.mouseButton.x, evnt.mouseButton.y)) == true)
+					{
+						if (evnt.type == sf::Event::MouseButtonPressed && evnt.mouseButton.button == sf::Mouse::Left)
+						{
+							if (turn == 1)
+							{
+								cout << "\n magenda 4 has been selected";
+								Ps[turn]->move2(6, 3, magenda[3], Nop);
+								moved = true;
+								break;
+							}
+						}
+					}
+
+					else if (isSpriteHover(blue[0].getGlobalBounds(), sf::Vector2f(evnt.mouseButton.x, evnt.mouseButton.y)) == true)
+					{
+						if (evnt.type == sf::Event::MouseButtonPressed && evnt.mouseButton.button == sf::Mouse::Left)
+						{
+							if (turn == 2)
+							{
+								cout << "\n blue 1 has been selected";
+								this->Ps[turn]->move2(6, 0, blue[0], Nop);
+								moved = true;
+								break;
+							}
+						}
+						}
+					else if (isSpriteHover(blue[1].getGlobalBounds(), sf::Vector2f(evnt.mouseButton.x, evnt.mouseButton.y)) == true)
+					{
+						if (evnt.type == sf::Event::MouseButtonPressed && evnt.mouseButton.button == sf::Mouse::Left)
+						{
+							if (turn == 2)
+							{
+								cout << "\n blue 2 has been selected";
+								this->Ps[turn]->move2(6, 1, blue[1], Nop);
+								moved = true;
+								break;
+							}
+						}
+						}
+					else if (isSpriteHover(blue[2].getGlobalBounds(), sf::Vector2f(evnt.mouseButton.x, evnt.mouseButton.y)) == true)
+					{
+						if (evnt.type == sf::Event::MouseButtonPressed && evnt.mouseButton.button == sf::Mouse::Left)
+						{
+							if (turn == 2)
+							{
+								cout << "\n blue 3 has been selected";
+								this->Ps[turn]->move2(6, 2, blue[2], Nop);
+								moved = true;
+								break;
+							}
+						}
+						}
+					else if (isSpriteHover(blue[3].getGlobalBounds(), sf::Vector2f(evnt.mouseButton.x, evnt.mouseButton.y)) == true)
+					{
+						if (evnt.type == sf::Event::MouseButtonPressed && evnt.mouseButton.button == sf::Mouse::Left)
+						{
+							if (turn == 2)
+							{
+								cout << "\n blue 4 has been selected";
+								Ps[turn]->move2(6, 3, blue[3], Nop);
+								moved = true;
+								break;
+							}
+						}
+						}
+
+					else if (isSpriteHover(green[0].getGlobalBounds(), sf::Vector2f(evnt.mouseButton.x, evnt.mouseButton.y)) == true)
+					{
+						if (evnt.type == sf::Event::MouseButtonPressed && evnt.mouseButton.button == sf::Mouse::Left)
+						{
+							if (turn == 3)
 							{
 								cout << "\n green 1 has been selected";
 								this->Ps[turn]->move2(6, 0, green[0], Nop);
@@ -728,7 +847,7 @@ void Ludo::Play()
 					{
 						if (evnt.type == sf::Event::MouseButtonPressed && evnt.mouseButton.button == sf::Mouse::Left)
 						{
-							if (turn == 1)
+							if (turn == 3)
 							{
 								cout << "\n green 2 has been selected";
 								this->Ps[turn]->move2(6, 1, green[1], Nop);
@@ -741,7 +860,7 @@ void Ludo::Play()
 					{
 						if (evnt.type == sf::Event::MouseButtonPressed && evnt.mouseButton.button == sf::Mouse::Left)
 						{
-							if (turn == 1)
+							if (turn == 3)
 							{
 								cout << "\n green 3 has been selected";
 								this->Ps[turn]->move2(6, 2, green[2], Nop);
@@ -754,7 +873,7 @@ void Ludo::Play()
 					{
 						if (evnt.type == sf::Event::MouseButtonPressed && evnt.mouseButton.button == sf::Mouse::Left)
 						{
-							if (turn == 1)
+							if (turn == 3)
 							{
 								cout << "\n green 4 has been selected";
 								Ps[turn]->move2(6, 3, green[3], Nop);
@@ -768,7 +887,7 @@ void Ludo::Play()
 					{
 						if (evnt.type == sf::Event::MouseButtonPressed && evnt.mouseButton.button == sf::Mouse::Left)
 						{
-							if (turn == 2)
+							if (turn == 4)
 							{
 								cout << "\n yellow 1 has been selected";
 								this->Ps[turn]->move2(6, 0, yellow[0], Nop);
@@ -781,7 +900,7 @@ void Ludo::Play()
 					{
 						if (evnt.type == sf::Event::MouseButtonPressed && evnt.mouseButton.button == sf::Mouse::Left)
 						{
-							if (turn == 2)
+							if (turn == 4)
 							{
 								cout << "\n yellow 2 has been selected";
 								this->Ps[turn]->move2(6, 1, yellow[1], Nop);
@@ -794,7 +913,7 @@ void Ludo::Play()
 					{
 						if (evnt.type == sf::Event::MouseButtonPressed && evnt.mouseButton.button == sf::Mouse::Left)
 						{
-							if (turn == 2)
+							if (turn == 4)
 							{
 								cout << "\n green 3 has been selected";
 								this->Ps[turn]->move2(6, 2, yellow[2], Nop);
@@ -807,7 +926,7 @@ void Ludo::Play()
 					{
 						if (evnt.type == sf::Event::MouseButtonPressed && evnt.mouseButton.button == sf::Mouse::Left)
 						{
-							if (turn == 2)
+							if (turn == 4)
 							{
 								cout << "\n yellow 4 has been selected";
 								Ps[turn]->move2(6, 3, yellow[3], Nop);
@@ -817,59 +936,58 @@ void Ludo::Play()
 						}
 					}
 
-
-					else if (isSpriteHover(blue[0].getGlobalBounds(), sf::Vector2f(evnt.mouseButton.x, evnt.mouseButton.y)) == true)
+					else if (isSpriteHover(grey[0].getGlobalBounds(), sf::Vector2f(evnt.mouseButton.x, evnt.mouseButton.y)) == true)
 					{
 						if (evnt.type == sf::Event::MouseButtonPressed && evnt.mouseButton.button == sf::Mouse::Left)
 						{
-							if (turn == 3)
+							if (turn == 5)
 							{
-								cout << "\n blue 1 has been selected";
-								this->Ps[turn]->move2(6, 0, blue[0], Nop);
+								cout << "\n grey 1 has been selected";
+								this->Ps[turn]->move2(6, 0, grey[0], Nop);
 								moved = true;
 								break;
 							}
 						}
-					}
-					else if (isSpriteHover(blue[1].getGlobalBounds(), sf::Vector2f(evnt.mouseButton.x, evnt.mouseButton.y)) == true)
+						}
+					else if (isSpriteHover(grey[1].getGlobalBounds(), sf::Vector2f(evnt.mouseButton.x, evnt.mouseButton.y)) == true)
 					{
 						if (evnt.type == sf::Event::MouseButtonPressed && evnt.mouseButton.button == sf::Mouse::Left)
 						{
-							if (turn == 3)
+							if (turn == 5)
 							{
-								cout << "\n blue 2 has been selected";
-								this->Ps[turn]->move2(6, 1, blue[1], Nop);
+								cout << "\n grey 2 has been selected";
+								this->Ps[turn]->move2(6, 1, grey[1], Nop);
 								moved = true;
 								break;
 							}
 						}
-					}
-					else if (isSpriteHover(blue[2].getGlobalBounds(), sf::Vector2f(evnt.mouseButton.x, evnt.mouseButton.y)) == true)
+						}
+					else if (isSpriteHover(grey[2].getGlobalBounds(), sf::Vector2f(evnt.mouseButton.x, evnt.mouseButton.y)) == true)
 					{
 						if (evnt.type == sf::Event::MouseButtonPressed && evnt.mouseButton.button == sf::Mouse::Left)
 						{
-							if (turn == 3)
+							if (turn == 5)
 							{
-								cout << "\n blue 3 has been selected";
-								this->Ps[turn]->move2(6, 2, blue[2], Nop);
+								cout << "\n grey 3 has been selected";
+								this->Ps[turn]->move2(6, 2, grey[2], Nop);
 								moved = true;
 								break;
 							}
 						}
-					}
-					else if (isSpriteHover(blue[3].getGlobalBounds(), sf::Vector2f(evnt.mouseButton.x, evnt.mouseButton.y)) == true)
+						}
+					else if (isSpriteHover(grey[3].getGlobalBounds(), sf::Vector2f(evnt.mouseButton.x, evnt.mouseButton.y)) == true)
 					{
 						if (evnt.type == sf::Event::MouseButtonPressed && evnt.mouseButton.button == sf::Mouse::Left)
 						{
-							if (turn == 3)
+							if (turn == 5)
 							{
-								cout << "\n blue 4 has been selected";
-								Ps[turn]->move2(6, 3, blue[3], Nop);
+								cout << "\n grey 4 has been selected";
+								Ps[turn]->move2(6, 3, grey[3], Nop);
 								moved = true;
 								break;
 							}
 						}
-					}
+						}
 
 
 					window.clear(sf::Color::Black);
