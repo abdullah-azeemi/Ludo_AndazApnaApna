@@ -262,6 +262,42 @@ static void printBlue(sf::RenderWindow& window, int ri, int ci, vector<sf::Sprit
 	// display() will show image on screen
 	blue.push_back(s);
 }
+static void printMagenda(sf::RenderWindow& window, int ri, int ci, vector<sf::Sprite>& magenda)
+{
+	sf::Texture temp;
+	if (!temp.loadFromFile("Pmagenda.png"))  //  img ==> file name for image
+	{
+		throw("Unable to load img");
+	}
+
+	//sf::Sprite s(temp);
+	sf::Sprite s;
+	s.setTexture(temp);
+	s.setScale(0.1, 0.1); //  (width and heigth of image to be printed)
+
+	s.setPosition(ci, ri); // position of image
+	window.draw(s);	// draw() will only draw image on backend, image will not display on screen
+	// display() will show image on screen
+	magenda.push_back(s);
+}
+static void printGray(sf::RenderWindow& window, int ri, int ci, vector<sf::Sprite>& gray)
+{
+	sf::Texture temp;
+	if (!temp.loadFromFile("Pgreyy.png"))  //  img ==> file name for image
+	{
+		throw("Unable to load img");
+	}
+
+	//sf::Sprite s(temp);
+	sf::Sprite s;
+	s.setTexture(temp);
+	s.setScale(0.08, 0.08); //  (width and heigth of image to be printed)
+
+	s.setPosition(ci, ri); // position of image
+	window.draw(s);	// draw() will only draw image on backend, image will not display on screen
+	// display() will show image on screen
+	gray.push_back(s);
+}
 
 static void printDice1(sf::RenderWindow& window, int ri, int ci, vector<sf::Sprite> & dice)
 {
@@ -839,12 +875,14 @@ static void returnLocforBoard(int number, int& ri, int& ci, int Nop)
 	}
 }
 
-static void printAllPieces(sf::RenderWindow& window, Player** Ps, vector<sf::Sprite> & red, vector<sf::Sprite> & yellow, vector<sf::Sprite> & blue, vector<sf::Sprite> &green, int Nop)
+static void printAllPieces2(sf::RenderWindow& window, Player** Ps, vector<sf::Sprite>& red, vector<sf::Sprite>& yellow, vector<sf::Sprite>& blue, vector<sf::Sprite>& green, vector < sf::Sprite> & magenda, vector<sf::Sprite> & gray, int Nop)
 {
 	vector<int> redPos = Ps[0][0].getPositions();
-	vector<int> greenPos = Ps[1][0].getPositions();
-	vector<int> yellowPos = Ps[2][0].getPositions();
-	vector<int> bluePos = Ps[3][0].getPositions();
+	vector<int> magendaPos = Ps[1][0].getPositions();
+	vector<int> bluePos = Ps[2][0].getPositions();
+	vector<int> greenPos = Ps[3][0].getPositions();
+	vector<int> yellowPos = Ps[4][0].getPositions();
+	vector<int> greyPos = Ps[5][0].getPositions();
 
 	for (int i = 0; i < 4; i++)
 	{
@@ -855,20 +893,67 @@ static void printAllPieces(sf::RenderWindow& window, Player** Ps, vector<sf::Spr
 	for (int i = 0; i < 4; i++)
 	{
 		int ri = 0, ci = 0;
-		returnLocforBoard(greenPos[i], ri, ci,Nop);
-		printGreen(window, ri, ci,green);
-	}
-	for (int i = 0; i < 4; i++)
-	{
-		int ri = 0, ci = 0;
-		returnLocforBoard(yellowPos[i], ri, ci,Nop);
-		printYellow(window, ri, ci,yellow);
+		returnLocforBoard(magendaPos[i], ri, ci,Nop);
+		printMagenda(window, ri, ci,magenda);
 	}
 	for (int i = 0; i < 4; i++)
 	{
 		int ri = 0, ci = 0;
 		returnLocforBoard(bluePos[i], ri, ci,Nop);
 		printBlue(window, ri, ci,blue);
+	}
+	for (int i = 0; i < 4; i++)
+	{
+		int ri = 0, ci = 0;
+		returnLocforBoard(greenPos[i], ri, ci,Nop);
+		printGreen(window, ri, ci,green);
+	}
+	for (int i = 0; i < 4; i++)
+	{
+		int ri = 0, ci = 0;
+		returnLocforBoard(yellowPos[i], ri, ci, Nop);
+		printYellow(window, ri, ci, yellow);
+	}
+	for (int i = 0; i < 4; i++)
+	{
+		int ri = 0, ci = 0;
+		returnLocforBoard(greyPos[i], ri, ci, Nop);
+		printGray(window, ri, ci, gray);
+	}
+	
+	window.display();
+}
+
+static void printAllPieces(sf::RenderWindow& window, Player** Ps, vector<sf::Sprite>& red, vector<sf::Sprite>& yellow, vector<sf::Sprite>& blue, vector<sf::Sprite>& green, int Nop)
+{
+	vector<int> redPos = Ps[0][0].getPositions();
+	vector<int> greenPos = Ps[1][0].getPositions();
+	vector<int> yellowPos = Ps[2][0].getPositions();
+	vector<int> bluePos = Ps[3][0].getPositions();
+
+	for (int i = 0; i < 4; i++)
+	{
+		int ri = 0, ci = 0;
+		returnLocforBoard(redPos[i], ri, ci, Nop);
+		printRed(window, ri, ci, red);
+	}
+	for (int i = 0; i < 4; i++)
+	{
+		int ri = 0, ci = 0;
+		returnLocforBoard(greenPos[i], ri, ci, Nop);
+		printGreen(window, ri, ci, green);
+	}
+	for (int i = 0; i < 4; i++)
+	{
+		int ri = 0, ci = 0;
+		returnLocforBoard(yellowPos[i], ri, ci, Nop);
+		printYellow(window, ri, ci, yellow);
+	}
+	for (int i = 0; i < 4; i++)
+	{
+		int ri = 0, ci = 0;
+		returnLocforBoard(bluePos[i], ri, ci, Nop);
+		printBlue(window, ri, ci, blue);
 	}
 	window.display();
 }
