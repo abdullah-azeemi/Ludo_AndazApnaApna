@@ -44,7 +44,7 @@ Ludo::Ludo(int nop)
 	}
 	else if (nop == 6)
 	{
-		vector<int> initPositions1 = { -1,-2,-3,40 };
+		vector<int> initPositions1 = { -1,-2,-3,41 };
 		vector<int> initPositions2 = { -11,-12,-13,-14 };
 		vector<int> initPositions3 = { -21,-22,-23,-24 };
 		vector<int> initPositions4 = { -31,-32,-33,-34 };
