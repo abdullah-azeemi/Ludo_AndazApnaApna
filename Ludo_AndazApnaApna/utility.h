@@ -554,10 +554,9 @@ static void returnLocforBoard(int number, int& ri, int& ci, int Nop)
 		vector<int> yellow_des_ri = {70,104,136,169,203};
 		vector<int> yellow_des_ci = {375,375,375,375,375};
 
+
 		vector<int> lightGrey_des_ri = {201,219,234,249,267};
 		vector<int> lightGrey_des_ci = {601,573,540,519,486};
-
-
 		if (number <= -1 && number >= -4)
 		{
 			if (number == -1)

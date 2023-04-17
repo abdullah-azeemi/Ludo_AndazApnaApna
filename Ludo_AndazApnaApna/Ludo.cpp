@@ -215,7 +215,7 @@ void Ludo::Play()
 		window.display();
 	}
 
-	if (1)
+	if (0)
 	{
 		vector <sf::Sprite> red;
 		vector <sf::Sprite> blue;
@@ -566,7 +566,7 @@ void Ludo::Play()
 			}
 		}
 	}
-	if (0)
+	if (1)
 	{
 		vector <sf::Sprite> red;
 		vector <sf::Sprite> blue;
