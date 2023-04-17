@@ -19,9 +19,11 @@ private:
 	bool hasDice_displayed;
 
 public:
-	Ludo();
+	Ludo(int nop);
 	void displayTurnMsg(Player* P1);
 	void Play();
 	void turnChange();
+	void kill(Player* Ps[6]);
+	bool isJota();
 };
 

@@ -5,6 +5,7 @@
 #include"Board.h"
 #include"utility.h"
 
+
 bool isSpriteHover(sf::FloatRect sprite, sf::Vector2f mp)
 {
 	if (sprite.contains(mp)) {
@@ -13,21 +14,21 @@ bool isSpriteHover(sf::FloatRect sprite, sf::Vector2f mp)
 	return false;
 }
 
-Ludo::Ludo()
+Ludo::Ludo(int nop)
 { 
 	//cout << "\n How many Players : ";
 	//int x;
 	//cin >> x;
 	//this->Nop = x;
-	this->Nop = 4;
 
-	if (Nop == 4)
+	if (nop == 4)
 	{
-		vector<int> initPositions1 = { -1,-2,-3,-4 };
-		vector<int> initPositions2 = { -11,-12,-13,-14 };
-		vector<int> initPositions3 = { -21,-22,-23,-24 };
-		vector<int> initPositions4 = { -31,-32,-33,-34 };
+		vector<int> initPositions1 = { 10,-2,-3,-4 };
+		vector<int> initPositions2 = { 11,-12,-13,-14 };
+		vector<int> initPositions3 = { 12,12,-23,-24 };
+		vector<int> initPositions4 = { 14,-32,-33,-34 };
 		/// Initializing all the players 
+
 		char sym1[4] = { 'b1', 'b2', 'b3','b4' };
 		this->Ps[0] = new Player("Player 1", Color(RED), 1, 9, 52, sym1, initPositions1, 0, 4, 0, 101);
 
@@ -41,27 +42,29 @@ Ludo::Ludo()
 		this->Ps[3] = new Player("Player 4", Color(BLUE), 40, 48, 38, sym1, initPositions4, 0, 4, 0,401);
 
 	}
-	else if (Nop == 6)
+	else if (nop == 6)
 	{
 		vector<int> initPositions = { -1,-1,-1,-1 };
 		/// Initializing all the players 
 		char sym1[4] = { 'b1', 'b2', 'b3','b4' };
-		this->Ps[0] = new Player("Player 1", Color(BLUE), 1, 9, 89, sym1, initPositions, 0, 4, 0,101);
+		this->Ps[0] = new Player("Player 1", Color(RED), 1, 9, 89, sym1, initPositions, 0, 4, 0,101);
 
 		char sym2[4] = { 'r1', 'r2', 'r3','r4' };
-		this->Ps[1] = new Player("Player 2", Color(RED), 14, 22, 12, sym1, initPositions, 0, 4, 0,201);
+		this->Ps[1] = new Player("Player 2", Color(MAGENTA), 14, 22, 12, sym1, initPositions, 0, 4, 0,201);
 
 		char sym3[4] = { 'y1', 'y2', 'y3','y4' };
-		this->Ps[2] = new Player("Player 3", Color(YELLOW), 37, 35, 25, sym1, initPositions, 0, 4, 0,301);
+		this->Ps[2] = new Player("Player 3", Color(BLUE), 37, 35, 25, sym1, initPositions, 0, 4, 0,301);
 
 		char sym4[4] = { 'm1', 'm2', 'm3','m4' };
-		this->Ps[3] = new Player("Player 4", Color(MAGENTA), 46, 54, 44, sym1, initPositions, 0, 4, 0,401);
+		this->Ps[3] = new Player("Player 4", Color(GREEN), 46, 54, 44, sym1, initPositions, 0, 4, 0,401);
 
 		char sym5[4] = { 'g1', 'g2', 'g3','g4' };
-		this->Ps[4] = new Player("Player 5", Color(GREEN), 59, 67, 57, sym1, initPositions, 0, 4, 0,501);
+		this->Ps[4] = new Player("Player 5", Color(YELLOW), 59, 67, 57, sym1, initPositions, 0, 4, 0,501);
 
 		char sym6[4] = { 'dg1', 'dg2', 'dg3','dg4' };
 		this->Ps[5] = new Player("Player 6", Color(DARKGREY), 72, 80, 70, sym1, initPositions, 0, 4, 0,601);
+
+		vector<int>saveC = { };
 	}
 	
 	this->turn = 0;
@@ -69,7 +72,7 @@ Ludo::Ludo()
 	this->hasDice_rolled = false;
 	this->moved = false;
 	this->hasDice_displayed = false;
-
+	this->Nop = nop;
 }
 void Ludo::displayTurnMsg(Player* P1)
 {
@@ -78,7 +81,7 @@ void Ludo::displayTurnMsg(Player* P1)
 void Ludo::turnChange()
 {
 	this->turn = (turn + 1) % (Nop);
-}
+} 
 void Ludo::Play()
 {
 
@@ -87,6 +90,7 @@ void Ludo::Play()
 	vector <sf::Sprite> green;
 	vector <sf::Sprite> yellow;
 	vector <sf::Sprite> dice;
+	vector<int> saveC = { 1,12,14,25,27,38,40,52 };
 
 	int x = 0, y = 0, z;
 	while (false)
@@ -126,7 +130,7 @@ void Ludo::Play()
 		while (window.isOpen())
 		{
 			print6(window);
-			
+			printAllPieces(window, Ps, red, yellow, blue, green,Nop);
 			sf::Event evnt;
 			while (window.pollEvent(evnt))
 			{
@@ -153,7 +157,6 @@ void Ludo::Play()
 						cout << "\n row is : " << ri << " col is : " << ci;
 						int x = returnIndexforBoardfor4Board(ci, ri);
 						//cout << "\n Index is : " << x;
-						printAllPieces(window, Ps, red, yellow, blue, green);
 					}
 					break;
 
@@ -235,7 +238,7 @@ void Ludo::Play()
 						cout << "\n turn is : " << turn;
 						//index = 1;
 						this->Ps[turn]->move(index, 5, turn);
-						printAllPieces(window, this->Ps, red, yellow, blue, green);
+						printAllPieces(window, this->Ps, red, yellow, blue, green,Nop);
 					}
 					break;
 				}
@@ -277,21 +280,23 @@ void Ludo::Play()
 			vector<sf::Sprite> gr;
 			gr.push_back(sprite);
 
-			
 			while (window.isOpen())
 			{
 				print4(window);
-				printAllPieces(window, this->Ps, red, yellow, blue, green);
+				printAllPieces(window, this->Ps, red, yellow, blue, green,Nop);
 				indexForMaxRolls = 0;
 				sf::Event evnt;
 				while (window.pollEvent(evnt))
 				{
 					if (moved)
 					{
-						turnChange();
+						//turnChange();
 						cout << "turn is " << turn;
 						moved = false;
 					}
+					
+
+					
 					switch (evnt.type)
 					{
 					case sf::Event::Closed:
@@ -357,8 +362,12 @@ void Ludo::Play()
 							if (turn == 0)
 							{
 								cout << "\n Red 1 has been selected";
-								this->Ps[turn]->move2(1, 0,red[0]);
+								cout << "\n loaction : "; vector<int> x = Ps[0]->getPositions();
+								cout << x[0];
+								this->Ps[turn]->move2(1, 0,red[0],Nop);
 								moved = true;
+
+								kill(Ps);
 								break;
 							}
 						}
@@ -370,7 +379,7 @@ void Ludo::Play()
 							if (turn == 0)
 							{
 								cout << "\n Red 2 has been selected";
-								this->Ps[turn]->move2(6, 1, red[1]);
+								this->Ps[turn]->move2(6, 1, red[1],Nop);
 								moved = true;
 								break;
 							}
@@ -383,7 +392,7 @@ void Ludo::Play()
 							if (turn == 0)
 							{
 								cout << "\n Red 3 has been selected";
-								this->Ps[turn]->move2(6, 2, red[2]);
+								this->Ps[turn]->move2(6, 2, red[2],Nop);
 								moved = true;
 								break;
 							}
@@ -396,7 +405,7 @@ void Ludo::Play()
 							if (turn == 0)
 							{
 								cout << "\n Red 4 has been selected";
-								Ps[turn]->move2(6, 3, red[3]);
+								Ps[turn]->move2(6, 3, red[3],Nop);
 								moved = true;
 								break;
 							}
@@ -410,7 +419,7 @@ void Ludo::Play()
 							if (turn == 1)
 							{
 								cout << "\n green 1 has been selected";
-								this->Ps[turn]->move2(6, 0, green[0]);
+								this->Ps[turn]->move2(6, 0, green[0],Nop);
 								moved = true;
 								break;
 							}
@@ -423,7 +432,7 @@ void Ludo::Play()
 							if (turn == 1)
 							{
 								cout << "\n green 2 has been selected";
-								this->Ps[turn]->move2(6, 1, green[1]);
+								this->Ps[turn]->move2(6, 1, green[1],Nop);
 								moved = true;
 								break;
 							}
@@ -436,7 +445,7 @@ void Ludo::Play()
 							if (turn == 1)
 							{
 								cout << "\n green 3 has been selected";
-								this->Ps[turn]->move2(6, 2, green[2]);
+								this->Ps[turn]->move2(6, 2, green[2],Nop);
 								moved = true;
 								break;
 							}
@@ -449,7 +458,7 @@ void Ludo::Play()
 							if (turn == 1)
 							{
 								cout << "\n green 4 has been selected";
-								Ps[turn]->move2(6, 3, green[3]);
+								Ps[turn]->move2(6, 3, green[3],Nop);
 								moved = true;
 								break;
 							}
@@ -463,7 +472,7 @@ void Ludo::Play()
 							if (turn == 2)
 							{
 								cout << "\n yellow 1 has been selected";
-								this->Ps[turn]->move2(6, 0, yellow[0]);
+								this->Ps[turn]->move2(6, 0, yellow[0],Nop);
 								moved = true;
 								break;
 							}
@@ -476,7 +485,7 @@ void Ludo::Play()
 							if (turn == 2)
 							{
 								cout << "\n yellow 2 has been selected";
-								this->Ps[turn]->move2(6, 1, yellow[1]);
+								this->Ps[turn]->move2(6, 1, yellow[1],Nop);
 								moved = true;
 								break;
 							}
@@ -489,7 +498,7 @@ void Ludo::Play()
 							if (turn == 2)
 							{
 								cout << "\n green 3 has been selected";
-								this->Ps[turn]->move2(6, 2, yellow[2]);
+								this->Ps[turn]->move2(6, 2, yellow[2],Nop);
 								moved = true;
 								break;
 							}
@@ -502,7 +511,7 @@ void Ludo::Play()
 							if (turn == 2)
 							{
 								cout << "\n yellow 4 has been selected";
-								Ps[turn]->move2(6, 3, yellow[3]);
+								Ps[turn]->move2(6, 3, yellow[3],Nop);
 								moved = true;
 								break;
 							}
@@ -517,7 +526,7 @@ void Ludo::Play()
 							if (turn == 3)
 							{
 								cout << "\n blue 1 has been selected";
-								this->Ps[turn]->move2(6, 0, blue[0]);
+								this->Ps[turn]->move2(6, 0, blue[0],Nop);
 								moved = true;
 								break;
 							}
@@ -530,7 +539,7 @@ void Ludo::Play()
 							if (turn == 3)
 							{
 								cout << "\n blue 2 has been selected";
-								this->Ps[turn]->move2(6, 1, blue[1]);
+								this->Ps[turn]->move2(6, 1, blue[1],Nop);
 								moved = true;
 								break;
 							}
@@ -543,7 +552,7 @@ void Ludo::Play()
 							if (turn == 3)
 							{
 								cout << "\n blue 3 has been selected";
-								this->Ps[turn]->move2(6, 2, blue[2]);
+								this->Ps[turn]->move2(6, 2, blue[2],Nop);
 								moved = true;
 								break;
 							}
@@ -556,7 +565,7 @@ void Ludo::Play()
 							if (turn == 3)
 							{
 								cout << "\n blue 4 has been selected";
-								Ps[turn]->move2(6, 3, blue[3]);
+								Ps[turn]->move2(6, 3, blue[3],Nop);
 								moved = true;
 								break;
 							}
@@ -577,4 +586,108 @@ void Ludo::Play()
 	}
 
 }
+void Ludo::kill(Player* Ps[6])
+{
+	int index = turn;
+	vector<int> saveC = { 1,10,14,22,27,35,40,52 };
+	vector<int> positions1 = Ps[turn]->getPositions();
 
+	bool isFound = false, saved = false;
+	int ri = 0, rr = 0;
+
+	int count;
+	for (; ri < Nop && isFound == false; ri++)
+	{
+		saved = false;
+		vector<int> positions2 = Ps[ri]->getPositions();
+		if (ri != index)
+		{
+			count = 0;
+			for (int r = 0; r < 4; r++)
+			{
+				if (positions1[r] == positions2[r])
+				{
+					for (int x = 0; x < positions1.size(); x++)
+					{
+						if (positions1[r] == positions2[x])
+						{
+							count++;
+						}
+					}
+					
+					int foundPos = positions1[r];
+					
+					for (int i = 0; i < saveC.size(); i++)
+					{
+						if (foundPos == saveC[i])
+						{
+							saved = true;
+							break;
+						}
+					}
+					if (!saved || count < 2)
+					{
+						isFound = true;
+						rr = r;
+						break;
+					}
+				}
+				
+			}
+		}
+	}
+	if (!saved)
+	{
+		ri--;
+		if (isFound && count < 2)
+		{
+			vector<int> pos;
+			if (ri == 0)
+			{
+				pos = Ps[ri]->getPositions();
+				int number;
+				if (rr == 0) { number = -1; }
+				else if (rr == 1) { number = -2; }
+				else if (rr == 2) { number = -3; }
+				else { number = -4; }
+				pos[rr] = number;
+			}
+			else if (ri == 1)
+			{
+				pos = Ps[ri]->getPositions();
+				int number;
+				if (rr == 0) { number = -11; }
+				else if (rr == 1) { number = -12; }
+				else if (rr == 2) { number = -13; }
+				else { number = -14; }
+				pos[rr] = number;
+			}
+			else if (ri == 2)
+			{
+				pos = Ps[ri]->getPositions();
+				int number;
+				if (rr == 0) { number = -21; }
+				else if (rr == 1) { number = -22; }
+				else if (rr == 2) { number = -23; }
+				else { number = -24; }
+				pos[rr] = number;
+			}
+			else if (ri == 3)
+			{
+				pos = Ps[ri]->getPositions();
+				int number;
+				if (rr == 0) { number = -31; }
+				else if (rr == 1) { number = -32; }
+				else if (rr == 2) { number = -33; }
+				else { number = -34; }
+				pos[rr] = number;
+			}
+			Ps[ri]->update_the_Pos(pos);
+		}
+	}
+}
+
+bool Ludo::isJota()
+{
+	return false;
+}

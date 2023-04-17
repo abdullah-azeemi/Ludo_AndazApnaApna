@@ -42,7 +42,8 @@ public:
 	void getOutofHome(int turn, int nop);
 	void move(int number, int diceRolled_number, int turn);
 
-	void move2(int diceRolled_number, int index, sf::Sprite &s);
+	void move2(int diceRolled_number, int index, sf::Sprite &s, int Nop);
+	void update_the_Pos(vector<int> newPos);
 
 };
 

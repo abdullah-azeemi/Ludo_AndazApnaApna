@@ -56,7 +56,7 @@ static void print6(sf::RenderWindow& window)
 
 	s.setPosition(column, row); // position of image
 	window.draw(s);	// draw() will only draw image on backend, image will not display on screen
-	window.display();  // display() will show image on screen
+	//window.display();  // display() will show image on screen
 
 }
 static void print4(sf::RenderWindow& window)
@@ -377,9 +377,8 @@ static void printDice6(sf::RenderWindow& window, int ri, int ci, vector<sf::Spri
 	dice.push_back(s);
 
 }
-static void returnLocforBoard(int number, int& ri, int& ci)
+static void returnLocforBoard(int number, int& ri, int& ci, int Nop)
 {
-	int Nop = 4;
 	if (Nop < 5)
 	{
 		/// These are the inityal hardcorded location for pieces in their homes 
@@ -400,10 +399,10 @@ static void returnLocforBoard(int number, int& ri, int& ci)
 		// Intail pieces initialization ends here
 
 		vector<int> all_Ri_Locations = { 660,614,573,526,485,441,  387,387,387,387,387,387, 345,
-										   300,300,300,300,300,300,300  ,250,215,170,125,80,45  , 35,75, 75,120,165,210,
+										   300,300,300,300,300 ,300,250,215,170,125,80 ,30,30    , 35, 75,120,165,210,
 											 255,300,300,300,300,300,300,345,390,390,390,390,390 ,390,432,477,522,567,612,657,657 };
 		vector<int> all_Ci_Locations = { 645,645,645,645,645,645,  600,555,510,465,420,375,  378,378,
-										   423,468,513,558,603,648, 645,645,645,645,645,645,  690, 735,  735,735,735,735,735,
+										   423,468,513,558, 603, 645,645,645,645,645,645,  690, 735,  735,735,735,735,735,
 											780,825,870,915,960,1005,1005,1005,960,915,870,825, 780 ,735,735,735,735,735,735,690,667 };
 
 
@@ -473,7 +472,7 @@ static void returnLocforBoard(int number, int& ri, int& ci)
 		}
 
 	}
-	else if (Nop >4)
+	else if (Nop == 6)
 	{
 		vector<int> Red_home_ri = {539,605,586,521};
 		vector<int> Red_home_ci = {546,527,464,480};
@@ -840,7 +839,7 @@ static void returnLocforBoard(int number, int& ri, int& ci)
 	}
 }
 
-static void printAllPieces(sf::RenderWindow& window, Player** Ps, vector<sf::Sprite> & red, vector<sf::Sprite> & yellow, vector<sf::Sprite> & blue, vector<sf::Sprite> &green)
+static void printAllPieces(sf::RenderWindow& window, Player** Ps, vector<sf::Sprite> & red, vector<sf::Sprite> & yellow, vector<sf::Sprite> & blue, vector<sf::Sprite> &green, int Nop)
 {
 	vector<int> redPos = Ps[0][0].getPositions();
 	vector<int> greenPos = Ps[1][0].getPositions();
@@ -850,25 +849,25 @@ static void printAllPieces(sf::RenderWindow& window, Player** Ps, vector<sf::Spr
 	for (int i = 0; i < 4; i++)
 	{
 		int ri = 0, ci = 0;
-		returnLocforBoard(redPos[i], ri, ci);
+		returnLocforBoard(redPos[i], ri, ci,Nop);
 		printRed(window, ri,ci,red);
 	}
 	for (int i = 0; i < 4; i++)
 	{
 		int ri = 0, ci = 0;
-		returnLocforBoard(greenPos[i], ri, ci);
+		returnLocforBoard(greenPos[i], ri, ci,Nop);
 		printGreen(window, ri, ci,green);
 	}
 	for (int i = 0; i < 4; i++)
 	{
 		int ri = 0, ci = 0;
-		returnLocforBoard(yellowPos[i], ri, ci);
+		returnLocforBoard(yellowPos[i], ri, ci,Nop);
 		printYellow(window, ri, ci,yellow);
 	}
 	for (int i = 0; i < 4; i++)
 	{
 		int ri = 0, ci = 0;
-		returnLocforBoard(bluePos[i], ri, ci);
+		returnLocforBoard(bluePos[i], ri, ci,Nop);
 		printBlue(window, ri, ci,blue);
 	}
 	window.display();
@@ -928,3 +927,4 @@ static void printDice(sf::RenderWindow& window, Player** Ps, vector<int> diceRol
 		window.display();
 	}
 }
+

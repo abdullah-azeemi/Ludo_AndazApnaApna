@@ -147,12 +147,16 @@ void Player::move(int number, int diceRolled_number, int turn)
 	}
 
 }
-
+void Player::update_the_Pos(vector<int> newPos)
+{
+	Player::initPos.clear();
+	Player::initPos.assign(newPos.begin(), newPos.end());
+}
 vector<int>Player::getPositions()
 {
 	return this->initPos;
 }
-void Player::move2(int diceRolled_number, int index, sf::Sprite & s)
+void Player::move2(int diceRolled_number, int index, sf::Sprite & s, int Nop)
 {
 	bool kuchHua = false;
 
@@ -161,25 +165,31 @@ void Player::move2(int diceRolled_number, int index, sf::Sprite & s)
 		int loc = initPos[index] + diceRolled_number;
 		if (Player::get_diceWin_Pos() == 52)
 		{
-			if (loc > Player::get_diceWin_Pos())
+			if (initPos[index] < 100)
 			{
-				int y = 0;
-				y = loc % get_diceWin_Pos();
-				initPos[index] = getHomePos() + y-1;
-				kuchHua = true;
+				if (loc >= Player::get_diceWin_Pos())
+				{
+					int y = 0;
+					y = loc % get_diceWin_Pos();
+					initPos[index] = getHomePos() + y ;
+					kuchHua = true;
+				}
 			}
 		}
 		else 
 		{
-			if (initPos[index] < get_StartPos())
+			if (initPos[index] < 100)
 			{
-				int y = 0;
-				y = loc - Player::get_diceWin_Pos();
-				int y1 = Player::get_diceWin_Pos();
-				if (y > 0)
+				if (initPos[index] < get_StartPos())
 				{
-					initPos[index] = getHomePos() + y-1;
-					kuchHua = true;
+					int y = 0;
+					y = loc - Player::get_diceWin_Pos();
+					int y1 = Player::get_diceWin_Pos();
+					if (y > 0)
+					{
+						initPos[index] = getHomePos() + y - 1;
+						kuchHua = true;
+					}
 				}
 			}
 		}
@@ -204,6 +214,6 @@ void Player::move2(int diceRolled_number, int index, sf::Sprite & s)
 		}
 	}
 	int ri = 0, ci = 0;
-	returnLocforBoard(initPos[index], ri, ci);
+	returnLocforBoard(initPos[index], ri, ci,Nop);
 	s.setPosition(ci,ri);
 }

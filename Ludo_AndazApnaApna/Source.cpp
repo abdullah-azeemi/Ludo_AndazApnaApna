@@ -9,7 +9,8 @@ using namespace std;
 
 int main()
 {
-	Ludo C;
+	int nop = 4;
+	Ludo C(nop);
 	C.Play();
 
 	return 0;
