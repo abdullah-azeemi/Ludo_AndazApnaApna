@@ -291,7 +291,7 @@ static void printGray(sf::RenderWindow& window, int ri, int ci, vector<sf::Sprit
 	//sf::Sprite s(temp);
 	sf::Sprite s;
 	s.setTexture(temp);
-	s.setScale(0.08, 0.08); //  (width and heigth of image to be printed)
+	s.setScale(0.12, 0.12); //  (width and heigth of image to be printed)
 
 	s.setPosition(ci, ri); // position of image
 	window.draw(s);	// draw() will only draw image on backend, image will not display on screen
@@ -511,23 +511,23 @@ static void returnLocforBoard(int number, int& ri, int& ci, int Nop)
 	}
 	else if (Nop == 6)
 	{
-		vector<int> Red_home_ri = {539,605,586,521};
-		vector<int> Red_home_ci = {546,527,464,480};
+		vector<int> Red_home_ri = {539,600,583,521};
+		vector<int> Red_home_ci = {525,510,444,460};
 
-		vector<int> Magenda_home_ri = {584,603,525,537};
-		vector<int> Magenda_home_ci = {279,215,260,201};
+		vector<int> Magenda_home_ri = {589,607,525,542};
+		vector<int> Magenda_home_ci = {270,208,255,190};
 
-		vector<int> Blue_home_ri = {335,380,332,283};
-		vector<int> Blue_home_ci = {157,112,60,111};
+		vector<int> Blue_home_ri = {335,383,335,290};
+		vector<int> Blue_home_ci = {142,95,49,95};
 
-		vector<int> Green_home_ri = {148,131,64,83};
-		vector<int> Green_home_ci = {265,201,215,279};
+		vector<int> Green_home_ri = {151,134,71,87};
+		vector<int> Green_home_ci = {252,189,204,270};
 
-		vector<int> Yellow_home_ri = {82,143,131,66};
-		vector<int> Yellow_home_ci = {461,480,542,527};
+		vector<int> Yellow_home_ri = {88,150,134,70};
+		vector<int> Yellow_home_ci = {450,466,530,513};
 
-		vector<int> LightGrey_home_ri = {333,287,333,381};
-		vector<int> LightGrey_home_ci = {588,634,681,634};
+		vector<int> LightGrey_home_ri = {338,291,337,383};
+		vector<int> LightGrey_home_ci = {576,622,668,622};
 
 
 		vector<int> board_Positions_ri = {513,493,478,463,445,428,464,499,532,566,596,633,632,598,565,532,498,466,429,445,463,479,494,511,482,454,438,420,404,386,372    
@@ -655,46 +655,46 @@ static void returnLocforBoard(int number, int& ri, int& ci, int Nop)
 		{
 			if (number == -41)
 			{
-				ri = yellow_des_ri[0];
-				ci = yellow_des_ci[0];
+				ri = Yellow_home_ri[0];
+				ci = Yellow_home_ci[0];
 			}
 			else if (number == -42)
 			{
-				ri = yellow_des_ri[1];
-				ci = yellow_des_ci[1];
+				ri = Yellow_home_ri[1];
+				ci = Yellow_home_ci[1];
 			}
 			else if (number == -43)
 			{
-				ri = yellow_des_ri[2];
-				ci = yellow_des_ci[2];
+				ri = Yellow_home_ri[2];
+				ci = Yellow_home_ci[2];
 			}
 			else if (number == -44)
 			{
-				ri = yellow_des_ri[3];
-				ci = yellow_des_ci[3];
+				ri = Yellow_home_ri[3];
+				ci = Yellow_home_ci[3];
 			}
 		}
 		else if (number <= -51 && number >= -54)
 		{
 			if (number == -51)
 			{
-				ri = lightGrey_des_ri[0];
-				ci = lightGrey_des_ci[0];
+				ri = LightGrey_home_ri[0];
+				ci = LightGrey_home_ci[0];
 			}
 			else if (number == -52)
 			{
-				ri = lightGrey_des_ri[1];
-				ci = lightGrey_des_ci[1];
+				ri = LightGrey_home_ri[1];
+				ci = LightGrey_home_ci[1];
 			}
 			else if (number == -53)
 			{
-				ri = lightGrey_des_ri[2];
-				ci = lightGrey_des_ci[2];
+				ri = LightGrey_home_ri[2];
+				ci = LightGrey_home_ci[2];
 			}
 			else if (number == -54)
 			{
-				ri = lightGrey_des_ri[3];
-				ci = lightGrey_des_ci[3];
+				ri = LightGrey_home_ri[3];
+				ci = LightGrey_home_ci[3];
 			}
 
 		}
