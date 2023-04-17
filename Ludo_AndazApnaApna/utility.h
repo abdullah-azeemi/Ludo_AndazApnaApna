@@ -4,6 +4,7 @@
 #include<SFML/OpenGL.hpp>
 #include"Player.h"
 
+
 static void MouseClick(sf::RenderWindow& window, int& ri, int& ci)
 {
 	ri = -1;
