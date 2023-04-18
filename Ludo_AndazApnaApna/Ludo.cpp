@@ -44,7 +44,7 @@ Ludo::Ludo(int nop)
 	}
 	else if (nop == 6)
 	{
-		vector<int> initPositions1 = { -1,-2,-3,41 };
+		vector<int> initPositions1 = { -1,-2,-3,-4 };
 		vector<int> initPositions2 = { -11,-12,-13,-14 };
 		vector<int> initPositions3 = { -21,-22,-23,-24 };
 		vector<int> initPositions4 = { -31,-32,-33,-34 };
@@ -331,7 +331,7 @@ void Ludo::Play()
 								cout << "\n Red 1 has been selected";
 								cout << "\n loaction : "; vector<int> x = Ps[0]->getPositions();
 								cout << x[0];
-								this->Ps[turn]->move2(1, 0,red[0],Nop);
+								this->Ps[turn]->move2(6, 0,red[0],Nop);
 								moved = true;
 
 								kill(Ps);
@@ -608,7 +608,7 @@ void Ludo::Play()
 				{
 					if (moved)
 					{
-						//turnChange();
+						turnChange();
 						cout << "turn is " << turn;
 						moved = false;
 					}
@@ -680,7 +680,7 @@ void Ludo::Play()
 								cout << "\n Red 1 has been selected";
 								cout << "\n loaction : "; vector<int> x = Ps[0]->getPositions();
 								cout << x[0];
-								this->Ps[turn]->move2(1, 0, red[0], Nop);
+								this->Ps[turn]->move2(6, 0, red[0], Nop);
 								moved = true;
 
 								kill(Ps);

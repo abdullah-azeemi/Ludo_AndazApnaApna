@@ -416,7 +416,6 @@ static void printDice6(sf::RenderWindow& window, int ri, int ci, vector<sf::Spri
 }
 static void returnLocforBoard(int number, int& ri, int& ci, int Nop)
 {
-
 	if (Nop < 5)
 	{
 		/// These are the inityal hardcorded location for pieces in their homes 
